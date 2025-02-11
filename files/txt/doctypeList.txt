@@ -1,0 +1,7 @@
+# Each line represents a custom doctype name (e.g., Design.).
+# Example:
+
+# Design
+Site Details
+Test Case Configurator
+Test Fields

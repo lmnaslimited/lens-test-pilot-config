@@ -1,0 +1,15 @@
+# Each line represents a doctype filename to process (e.g., doctype.json).
+# Only the doctype specified in this file will be synced or updated.
+# Example:
+# Price List.json
+
+# If this file is empty, all .json files in the customRole folder will be processed.
+# This ensures no specific roles are missed when no selection is made.
+
+# If the word "Skip" is written in this file, the script will log a message
+# that the role updating process is skipped and will not execute any updates.
+# Example:
+# Skip
+# Log Message: "Role updating process is skipped as per the txt file."
+
+Skip

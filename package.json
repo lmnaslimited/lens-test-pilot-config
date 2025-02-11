@@ -1,0 +1,21 @@
+{
+    "name": "lens-test-pilot",
+    "version": "1.0.0",
+    "description": "LENS Test Pilot",
+    "main": "getClientScript.js",
+    "type": "module",
+    "scripts": {
+      "get": "cd files && node getClientScript.js && node getServerScript.js",
+      "upload": "cd files && node uploadClientScript.js && node uploadServerScript.js",
+      "get_field": "cd files && node getCustomField.js",
+      "update_field": "cd files && node updateCustomField.js",
+      "get_doctype": "cd files && node getCustomDoctype.js",
+      "update_doctype":"cd files && node updateCustomDoctype.js"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+      "dotenv": "^16.4.5",
+      "eslint": "^9.6.0"
+    }
+  }
