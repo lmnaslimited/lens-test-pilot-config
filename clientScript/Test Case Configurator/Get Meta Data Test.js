@@ -282,33 +282,54 @@ frappe.ui.form.on('Test Fields', {
    // Check if json_response exists and is not empty
    if (!frm.doc.json_response || frm.doc.json_response.trim() === '') {
        frappe.msgprint(__('Please fetch the doctype details first.'));
-       return;  // Return early if no data is available
+       frappe.model.set_value(cdt, cdn, 'is_child', 0);  // Reset checkbox
+       return;
    }
 
    if (is_child) {
        const child_names = getUniqueChildNames(frm.doc.json_response);
        console.log("Child Names:", child_names);  // Debugging
 
-       // Set options for child_name using frm.set_df_property()
-       frm.set_df_property('child_name', 'options', child_names.join('\n'));
+       // Update child_name options in the child table
+       let child_field = frappe.meta.get_docfield('Test Fields', 'child_name', frm.doc.name);
+       if (child_field) {
+           child_field.options = child_names.join('\n');
+       }
+
+       // Clear previous selections
+       frappe.model.set_value(cdt, cdn, 'child_name', '');
+       frappe.model.set_value(cdt, cdn, 'field_name', '');
+
        // Clear field_name options
-       frm.set_df_property('field_name', 'options', '');
-       frm.refresh_field('test_fields');
+       let field_field = frappe.meta.get_docfield('Test Fields', 'field_name', frm.doc.name);
+       if (field_field) {
+           field_field.options = '';
+       }
    } else {
        const field_names = getAllFieldNames(frm.doc.json_response);
        console.log("Field Names:", field_names);  // Debugging
 
-       // Set options for field_name using frm.set_df_property()
-       frm.set_df_property('field_name', 'options', field_names.join('\n'));
+       // Update field_name options in the child table
+       let field_field = frappe.meta.get_docfield('Test Fields', 'field_name', frm.doc.name);
+       if (field_field) {
+           field_field.options = field_names.join('\n');
+       }
+
+       // Clear previous selections
+       frappe.model.set_value(cdt, cdn, 'child_name', '');
+       frappe.model.set_value(cdt, cdn, 'field_name', '');
+
        // Clear child_name options
-       frm.set_df_property('child_name', 'options', '');
-       frm.refresh_field('test_fields');
+       let child_field = frappe.meta.get_docfield('Test Fields', 'child_name', frm.doc.name);
+       if (child_field) {
+           child_field.options = '';
+       }
    }
 
-   // Refresh the field after setting the options dynamically
-   frm.refresh_field('test_fields');
-   frm.trigger('validate'); 
+   // Refresh the specific row in the child table
+   frm.fields_dict["test_fields"].grid.refresh();
 }
+
 
 
 
