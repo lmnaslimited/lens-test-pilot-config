@@ -227,6 +227,9 @@ function fnProcessJsonResponse(frm, data) {
     }
 }
 
+
+
+
 // Function to get field names based on selected child_name
 function getFieldNamesForChild(json_response, child_name) {
    if (!json_response || !child_name) {
@@ -307,7 +310,7 @@ frappe.ui.form.on('Test Fields', {
        }
    },
    
-    pos(frm, cdt, cdn) {
+    test_fields_add(frm, cdt, cdn) {
         const all_field_names = getAllFieldNames(frm.doc.json_response); // Get all field names dynamically
         console.log("Field Names", all_field_names);
 
@@ -327,6 +330,7 @@ frappe.ui.form.on('Test Fields', {
         // Refresh the entire child table to make sure everything is updated
         frm.refresh_field("test_fields");
     },
+
 is_child(frm, cdt, cdn) {
    const item = locals[cdt][cdn];
    const is_child = item.is_child;
@@ -383,8 +387,6 @@ is_child(frm, cdt, cdn) {
 
    frm.fields_dict["test_fields"].grid.refresh();
 },
-
-
 
 });
 
