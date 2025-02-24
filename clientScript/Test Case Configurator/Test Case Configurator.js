@@ -1,22 +1,22 @@
 frappe.ui.form.on('Test Case Configurator', {
     // Function to calculate position and set it to the field (as requested)
-   fnGetPos(frm, item) {
-       const L_PREVITEM = frm.doc.test_fields[item.idx - 2]; // Get the previous item
+  fnGetPos(frm, item) {
+      const L_PREVITEM = frm.doc.test_fields[item.idx - 2]; // Get the previous item
 
-       // First row always starts at 10
-       if (item.idx === 1) {
-           item.pos = 10;
-       } else if (item.is_child) {
-           // Child rows increment by 0.01
-           item.pos = L_PREVITEM ? L_PREVITEM.pos + 0.01 : 10.01;
-       } else {
-           // Parent rows increment by 10 when action is clicked
-           // If action is clicked, reset to a clean number (e.g., 20, 30), ignoring decimals
-           item.pos = L_PREVITEM ? (item.action ? Math.floor(L_PREVITEM.pos) + 10 : L_PREVITEM.pos + 0.01) : 10;
-       }
+      // First row always starts at 10
+      if (item.idx === 1) {
+          item.pos = 10;
+      } else if (item.is_child) {
+          // Child rows increment by 0.01
+          item.pos = L_PREVITEM ? L_PREVITEM.pos + 0.01 : 10.01;
+      } else {
+          // Parent rows increment by 10 when action is clicked
+          // If action is clicked, reset to a clean number (e.g., 20, 30), ignoring decimals
+          item.pos = L_PREVITEM ? (item.action ? Math.floor(L_PREVITEM.pos) + 10 : L_PREVITEM.pos + 0.01) : 10;
+      }
 
-       frm.refresh_field('test_fields'); // Refresh field after setting pos
-   },
+      frm.refresh_field('test_fields'); // Refresh field after setting pos
+  },
     site: function (frm) {
         console.log("Site Details", frm.doc.site);
         if (frm.doc.site) {
@@ -111,13 +111,16 @@ function fnFetchDoctypeDetails(frm) {
                        }
                    })
                    .then(data => {
+                        const statusField = data.message.parent.fields.find(field => field.fieldname === 'status');
+                        if (statusField && statusField.options) {
+                            const statusOptions = statusField.options.split('\n'); // Assuming options are newline-separated
+                            // Update the child table 'status' field options
+                            frm.fields_dict["test_fields"].grid.update_docfield_property("status", "options", statusOptions.join("\n"));
+                            frm.refresh_field("test_fields"); // Refresh the field after setting options
+                        }
                        // Process the response and set the json_response field
                        fnProcessJsonResponse(frm, data);
-                        const statusField = data.message.parent.fields.find(field => field.fieldname === "status");
-                        if (statusField) {
-                            // Set the options for the status field in the child table
-                            frm.fields_dict["test_fields"].grid.update_docfield_property("status", "options", statusField.options);
-                        }
+                       
                    })
                    .catch(error => {
                        console.error('Error fetching data:', error);
@@ -127,6 +130,7 @@ function fnFetchDoctypeDetails(frm) {
        }
    });
 }
+
 
 function fnProcessJsonResponse(frm, data) {
     let fields = data.message.parent.fields;
@@ -294,42 +298,71 @@ function getUniqueChildNames(json_response) {
    return Array.from(child_names);
 }
 
+
 frappe.ui.form.on('Test Fields', {
     
    // When 'action' is triggered, calculate and set position
+    // action(frm, cdt, cdn) {
+    //     const item = locals[cdt][cdn];
+    //     frm.events.fnGetPos(frm, item, 'action');  // Triggered by "Action"
+    //     frappe.model.set_value(cdt, cdn, 'field_name', '');  // Clear field_name
+    //   frappe.model.set_value(cdt, cdn, 'child_name', '');  // Clear child_name
+
+    //   // Update child_name dropdown with only child table names
+    //   frm.fields_dict["test_fields"].grid.update_docfield_property("child_name", "options", '');
+       
+    //   // Ensure field_name options are cleared
+    //   frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", '');
+    // },
+
+// When 'action' is triggered, calculate and set position
    action(frm, cdt, cdn) {
        const item = locals[cdt][cdn];
+       if(item.action === 'Onload') {
+       frappe.model.set_value(cdt, cdn, 'field_name', '');  // Clear field_name
+      frappe.model.set_value(cdt, cdn, 'child_name', '');  // Clear child_name
+
+      // Update child_name dropdown with only child table names
+      frm.fields_dict["test_fields"].grid.update_docfield_property("child_name", "options", '');
+       
+      // Ensure field_name options are cleared
+      frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", '');
+       }
        if (!item.pos) {
            frm.events.fnGetPos(frm, item);  // Call fnGetPos function here
        }
    },
-   value(frm, cdt, cdn) {
+   field_name(frm, cdt, cdn) {
        const item = locals[cdt][cdn];
        if (!item.pos) {
            frm.events.fnGetPos(frm, item);  // Call fnGetPos function here
        }
    },
+    field_name(frm, cdt, cdn) {
+        const item = locals[cdt][cdn];
+        frm.events.fnGetPos(frm, item, 'field_name');  // Triggered by "Field Name"
+    },
    
     test_fields_add(frm, cdt, cdn) {
-        const all_field_names = getAllFieldNames(frm.doc.json_response); // Get all field names dynamically
-        console.log("Field Names", all_field_names);
+    const parent_field_names = getAllFieldNames(frm.doc.json_response); // Get only parent fields
+    console.log("Parent Field Names", parent_field_names);
 
-        // Get the row object
-        const row = locals[cdt][cdn];
+    const row = locals[cdt][cdn];
 
-        // Set the options for the "field_name" in the row
-        frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", all_field_names.join("\n"));
+    // Ensure only parent fields are available by default
+    frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", parent_field_names.join("\n"));
 
-        // Set a default value for the field_name (you can choose any value from all_field_names array)
-        const default_value = all_field_names[0] || ""; // Set the first field name as default (or empty string if array is empty)
-        frappe.model.set_value(cdt, row.name, "field_name", default_value);
+    // Set the first available field as default (or empty string if none exist)
+    const default_value = parent_field_names[0] || ""; 
+    frappe.model.set_value(cdt, row.name, "field_name", default_value);
+     frappe.model.set_value(cdt, row.name, "child_name", '');
+    
+    //////
+    
+    
 
-        // Refresh the specific field in the row to show the updated options and default value
-        // frm.fields_dict["test_fields"].grid.refresh_field("field_name");
-
-        // Refresh the entire child table to make sure everything is updated
-        frm.refresh_field("test_fields");
-    },
+    frm.refresh_field("test_fields");
+},
 
 is_child(frm, cdt, cdn) {
    const item = locals[cdt][cdn];
@@ -354,6 +387,12 @@ is_child(frm, cdt, cdn) {
        
        // Ensure field_name options are cleared
        frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", '');
+       
+       
+        // Set the first available field as default (or empty string if none exist)
+        const child_default_value = child_names[0] || ""; 
+        console.log("Child Default Value", child_default_value )
+        frappe.model.set_value(cdt, item.name, "child_name", child_default_value);
 
        // Manually trigger a refresh on the field_name to ensure the clearing is respected
        frm.fields_dict["test_fields"].grid.refresh();
@@ -365,6 +404,8 @@ is_child(frm, cdt, cdn) {
         // Repopulate field_name options based on the parent fields
         const all_field_names = getAllFieldNames(frm.doc.json_response);
         frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", all_field_names.join('\n'));
+       
+        frappe.model.set_value(cdt, item.name, "child_name", '');
 
         // Manually trigger a refresh on the field_name to ensure it's repopulated
         frm.fields_dict["test_fields"].grid.refresh();
@@ -383,10 +424,12 @@ is_child(frm, cdt, cdn) {
    } else {
     
         frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", all_field_names.join('\n'));
+        // frappe.model.set_value(cdt, cdn, 'child_name', '');
    }
 
    frm.fields_dict["test_fields"].grid.refresh();
 },
+
 
 });
 
