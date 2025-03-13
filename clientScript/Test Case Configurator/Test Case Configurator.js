@@ -22,13 +22,14 @@ frappe.ui.form.on('Test Case Configurator', {
             fnFetchDoctypeDetails(frm);
         }
     },
-      
+    //When the doctype is triggered, get the list of doctype from the site details
     doctype_to_be_tested: function (frm) {
         if (frm.doc.site && frm.doc.doctype_to_be_tested) {
            fnFetchDoctypeDetails(frm); 
        }
     },
 
+    // When sequence is updated, set the "depends_on" field to mandatory if needed
     sequence: function(frm){
         fnSetDependsOnMandatory(frm);
     },
@@ -155,6 +156,7 @@ function fnProcessJsonResponse(frm, idData) {
     // To store unique tab names
     let laTabNames = new Set();
     laTabNames.add("Details");
+   
     for (let ldField of laFields) {
         if (ldField.fieldtype === "Tab Break") {
             laTabNames.add(ldField.label);
@@ -326,7 +328,7 @@ frappe.ui.form.on('Test Fields', {
         const laParentFieldNames = fnGetAllFieldNames(frm.doc.json_response); 
         const ldItem = locals[cdt][cdn];
         // Ensure only parent fields are available by default
-        frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", laParentFieldNames.join("\n"));
+        frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", ['', ...laParentFieldNames].join("\n"));
         // Clear the child_name field before selecting is_child checkbox
         frappe.model.set_value(cdt, cdn, 'child_name', ''); 
         
@@ -388,10 +390,7 @@ frappe.ui.form.on('Test Fields', {
             // Ensure the field list updates properly
             frappe.model.set_value(cdt, cdn, 'field_name', '');
             frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", LA_FIELDOPTIONS.join('\n'));
-        }  
-        else {
-            
-        }       
+        }         
         frm.fields_dict["test_fields"].grid.refresh();
     },
 });
