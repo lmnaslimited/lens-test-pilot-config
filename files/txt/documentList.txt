@@ -1,0 +1,10 @@
+# Please provide entries in the format: key=value
+# 'Single Document' for fetching a single doctype's document ex:Single Document = Gitra Settings
+# 'Document' for fetching all documents of doctype ex:Document = Quotation
+# Optional filters can be added for fetching the doctype's document
+# ex: filters = {"status":"Cancelled}  but be sure to use filters = before 
+
+#document/Translation
+# To get the document, we use the format "Document = Doctype."
+# To update the document, we use the format "document/doctype."
+document/Test Case Configurator

@@ -1,15 +1,15 @@
 /* eslint-disable */
-import { getEndPointForDoctype } from "./functions.js";
+import { getEndPointForDoctype } from "./external.js";
 
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-dotenv.config();
+dotenv.config({path: '../../.env'});
 
 const baseFolder = '../clientScript';
 
 const myHeaders = new Headers();
-myHeaders.append("Authorization", process.env.KEY);
+myHeaders.append("Authorization", process.env.HOST_KEY);
 myHeaders.append('Content-Type', 'application/json');
 
 const baseUrl = getEndPointForDoctype("Client Script");
@@ -45,6 +45,7 @@ function createNewResource(requestBody) {
 
 function processFilesInFolder(folderPath, parentFolder = null) {
     try {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED=0
         const files = fs.readdirSync(folderPath);
 
         for (const file of files) {
