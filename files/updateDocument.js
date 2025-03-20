@@ -17,6 +17,7 @@ const filesListPath = path.join(process.cwd(), 'txt', 'documentList.txt'); // Pa
 // Function to upload a JSON file
 async function uploadJsonFile(filePath, isSingleDocument, folderName = "") {
   try {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const jsonData = JSON.parse(fileContent);
     const baseUrl = getEndPointForDoctype();
