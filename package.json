@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "get": "cd files && node getClientScript.js && node getServerScript.js",
-    "upload": "cd files && node updateCustomDoctype.js && node uploadClientScript.js && node uploadServerScript.js && node updateDocument.js",
+    "upload": "cd files && node updateCustomDoctype.js && node uploadClientScript.js && node uploadServerScript.js ", 
+    "upload_testdata": "cd files && node updateDocument.js",
     "get_field": "cd files && node getCustomField.js",
     "update_field": "cd files && node updateCustomField.js",
     "get_doctype": "cd files && node getCustomDoctype.js",
