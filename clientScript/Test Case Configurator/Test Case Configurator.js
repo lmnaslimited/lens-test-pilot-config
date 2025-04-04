@@ -35,11 +35,17 @@ frappe.ui.form.on('Test Case Configurator', {
     },
     
     refresh(frm) {
+
         if (frm.doc.site && frm.doc.doctype_to_be_tested) {
            fnFetchDoctypeDetails(frm); 
            fnFetchDoctypeList(frm);
        }
        fnSetDependsOnMandatory(frm);
+       if (frm.doc.json_response) {
+            const LA_FIELDNAMES = fnGetAllFieldNames(frm.doc.json_response);
+            frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", LA_FIELDNAMES.join("\n"));
+
+        }
     }
 });
 
@@ -128,10 +134,8 @@ function fnFetchDoctypeDetails(frm) {
                            frm.fields_dict["test_fields"].grid.refresh();
                        }
                        //If json Response is empty only update the json format
-                       if (!frm.doc.json_response || frm.doc.json_response.trim() === '') {
-                           fnProcessJsonResponse(frm, idData);
-                       }
-                       
+                       fnProcessJsonResponse(frm, idData);
+                                           
                    })
                    .catch(error => {
                        console.error('Error fetching data:', error);
@@ -163,7 +167,7 @@ function fnProcessJsonResponse(frm, idData) {
         }
 
         if (ldField.fieldtype === "Section Break") {
-            laSectionLabels.add(ldField.label);  
+            laSectionLabels.add(ldField.fieldname);  
         }
 
         if (!LA_NOTINCLUDE.includes(ldField.fieldtype)) {
