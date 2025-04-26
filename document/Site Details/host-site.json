@@ -1,0 +1,10 @@
+{
+  "name": "site-details",
+  "docstatus": 0,
+  "idx": 0,
+  "site_name": "qsgbcz.docker.localhost",
+  "authorization_key": "***************************************************",
+  "client": "Host",
+  "doctype_list": "[\"Customer\" , \"Item\" , \"Sales Order\" , \"Quotation\" , \"Supplier\" , \"Supplier Quotation\" , \"Purchase Order\" , \"Purchase Invoice\" , \"Purchase Receipt\",\"Sales Invoice ,\n\"Payment Entry\",\"Production Plan\",\"Job Card\",\"Work Order\",\"Delivery Note\"]",
+  "doctype": "Site Details"
+}

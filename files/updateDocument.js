@@ -14,72 +14,35 @@ myHeaders.append("Content-Type", "application/json"); // Set the content type
 const rootPath = path.resolve(process.cwd(), '..');
 const filesListPath = path.join(process.cwd(), 'txt', 'documentList.txt'); // Path to documentList.txt
 
+// Function to upload a JSON file
 async function uploadJsonFile(filePath, isSingleDocument, folderName = "") {
   try {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-    
-    // Step 1: Fetch site details (GET request)
-    const siteDetailsUrl = `${process.env.HOST_URL}/api/resource/Site Details/${process.env.TARGET_URL}`;
-    const response = await fetch(siteDetailsUrl, {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    });
-    
-    // Check if the response is ok
-    if (!response.ok) {
-      console.log("Response details:", response.status, response.statusText);
-      return;
-    }
-    
-    // Parse the site details
-    const siteDetails = await response.json();
-    const lSiteName = siteDetails.data.site_name;
-    const lClient = siteDetails.data.client;
-
-    // Step 2: Read and parse the JSON file content
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const jsonData = JSON.parse(fileContent);
     const baseUrl = getEndPointForDoctype();
 
-
-    // Add site name and client to the jsonData
-    jsonData.site = lSiteName;
-    jsonData.client_name = lClient;
-
-
-
-    const requestBody = { ...jsonData }; 
-
-    // Step 3: Determine the request URL for PUT or POST based on the document type
     const requestUrl = isSingleDocument
       ? `${baseUrl}${jsonData.name}/${jsonData.name}`
       : `${baseUrl}${folderName}/${jsonData.name}`;
 
-      
-    // Step 4: PUT request to update the document
     const putResponse = await fetch(requestUrl, {
       method: "PUT",
       headers: myHeaders,
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(jsonData),
     });
 
     if (putResponse.ok) {
-      console.log(`Updated document: ${requestBody.name}`);
+      console.log(`Updated document: ${jsonData.name}`);
     } else if (putResponse.status === 404) {
-      console.log(`Document not found for ${requestBody.name}. Trying to create it with POST...`);
-      
-      // Step 5: If document not found, try POST request to create it
-      delete requestBody.name; // Remove the name for the POST request
-      console.log(requestBody)
+      delete jsonData.name;
       const postResponse = await fetch(`${baseUrl}${folderName}`, {
         method: "POST",
         headers: myHeaders,
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify(jsonData),
       });
 
       if (postResponse.ok) {
-        console.log(`Created document: ${requestBody.name}`);
+        console.log(`Created document: ${jsonData.name}`);
       } else {
         const errorMessage = await postResponse.text();
         console.log(`HTTP error on POST! Status: ${postResponse.status}, Message: ${errorMessage}`);
@@ -105,7 +68,6 @@ async function processDirectory(directory, isSingleDocument) {
       if (stat.isDirectory()) {
         await processDirectory(entryPath, isSingleDocument);
       } else if (entry.endsWith('.json') && stat.isFile()) {
-        console.log(`Processing JSON file: ${entryPath}`);
         await uploadJsonFile(entryPath, isSingleDocument, path.basename(directory));
       }
     }
@@ -123,17 +85,14 @@ async function processJsonFilesFromList(filePath) {
  
     for (const relativePath of documentPaths) {
       const absolutePath = path.join(rootPath, relativePath); // Resolve paths from root directory
-      console.log(`Processing path: ${absolutePath}`);
 
       if (fs.existsSync(absolutePath)) {
         const stat = fs.statSync(absolutePath);
 
         if (stat.isDirectory()) {
-          console.log(`Traversing directory: ${absolutePath}`);
           const isSingleDocument = relativePath.includes('singleDocument');
           await processDirectory(absolutePath, isSingleDocument);
         } else if (stat.isFile() && absolutePath.endsWith('.json')) {
-          console.log(`Processing single JSON file: ${absolutePath}`);
           const isSingleDocument = relativePath.includes('singleDocument');
           await uploadJsonFile(absolutePath, isSingleDocument, path.basename(path.dirname(absolutePath)));
         }
@@ -146,6 +105,5 @@ async function processJsonFilesFromList(filePath) {
   }
 }
 
-//Start processing JSON files listed in the documentList.txt
+// Start processing JSON files listed in the documentList.txt
 processJsonFilesFromList(filesListPath).catch(console.error);
-// fnGetSiteDetails();

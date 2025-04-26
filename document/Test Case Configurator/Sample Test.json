@@ -7,7 +7,7 @@
   "depends_on": 0,
   "site": "",
   "doctype_to_be_tested": "Quotation",
-  "client_name": "",
+  "client_name": "Host",
   "json_response": "",
   "doctype": "Test Case Configurator",
   "test_fields": [
