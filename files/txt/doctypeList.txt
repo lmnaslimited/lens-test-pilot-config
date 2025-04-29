@@ -2,6 +2,11 @@
 # Example:
 
 # Design
-Site Details
-Test Case Configurator
-Test Fields
+Test Plan
+Test Lab
+Test Log
+Test Plan Reference
+Test Run
+Test Script
+Master Data
+Task Change Reference
