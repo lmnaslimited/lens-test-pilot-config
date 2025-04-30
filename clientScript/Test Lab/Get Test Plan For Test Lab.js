@@ -1,70 +1,60 @@
 frappe.ui.form.on('Test Lab', {
     refresh(frm) {
         frm.clear_custom_buttons();
+        
+       
 
-        if (frm.doc.task_id || frm.doc.test_plan_id) {
-            frm.add_custom_button('Get Test Plans', function () {
-                const existing_scripts = new Set(
-                    (frm.doc.test_plan_and_script || []).map(row => row.test_script)
-                );
+        frm.add_custom_button('Get Test Plans', async function () {
+            // Clear existing entries
+            frm.clear_table('test_plan_and_script');
+            await frm.save();  // Save to avoid duplicate rows issue during re-render
 
-                if (frm.doc.task_id) {
-                    frappe.call({
+            let items = frm.doc.test_lab_items || [];
+            console.log("List of Items", items)
+            for (let item of items) {
+                console.log("test", item.reference_document)
+                console.log("test", item.reference_name)
+                if (item.reference_document_type === "Task" && item.reference_name) {
+                    await frappe.call({
                         method: 'get_test_plan',
-                        args: { task_name: frm.doc.task_id },
+                        args: { task_name: item.reference_name },
                         callback: function (r) {
+                            console.log("Response", r.message)
                             if (r.message && r.message.data) {
-                                r.message.data.forEach(item => {
-                                    if (!existing_scripts.has(item.test_script)) {
-                                        let row = frm.add_child('test_plan_and_script');
-                                        row.test_plan = item.test_plan;
-                                        row.test_script = item.test_script;
-                                        row.master_data = item.master_data;  // Adding master_data to the row
-                                        existing_scripts.add(item.test_script);
-                                    }
+                                r.message.data.forEach(entry => {
+                                    let row = frm.add_child('test_plan_and_script');
+                                    row.task = item.reference_name;
+                                    row.test_plan = entry.test_plan;
+                                    row.test_script = entry.test_script;
+                                    row.master_data = entry.master_data;
                                 });
-                                frm.refresh_field('test_plan_and_script');
-                                frappe.msgprint('Test Plans and Scripts added from Task.');
-                            } else {
-                                frappe.msgprint('No Test Plans found for this Task.');
                             }
                         }
                     });
-                } else if (frm.doc.test_plan_id) {
-                    frappe.call({
+                } else if (item.reference_document_type === "Test Plan" && item.reference_name) {
+                    await frappe.call({
                         method: 'frappe.client.get',
                         args: {
                             doctype: 'Test Plan',
-                            name: frm.doc.test_plan_id
+                            name: item.reference_name
                         },
                         callback: function (r) {
                             if (r.message && r.message.test_script) {
-                                r.message.test_script.forEach(script_row => {
-                                    if (!existing_scripts.has(script_row.test_script)) {
-                                        let row = frm.add_child('test_plan_and_script');
-                                        row.test_plan = frm.doc.test_plan_id;
-                                        row.test_script = script_row.test_script;
-                                        row.master_data = script_row.master_data;  // Adding master_data to the row
-                                        existing_scripts.add(script_row.test_script);
-                                    }
+                                r.message.test_script.forEach(script => {
+                                    let row = frm.add_child('test_plan_and_script');
+                                    row.test_plan = item.reference_name;
+                                    row.test_script = script.test_script;
+                                    row.master_data = script.master_data;
                                 });
-                                frm.refresh_field('test_plan_and_script');
-                                frappe.msgprint('Test Scripts added from Test Plan.');
-                            } else {
-                                frappe.msgprint('No scripts found for the selected Test Plan.');
                             }
                         }
                     });
                 }
-            });
-        }
-    },
+            }
 
-    task_id(frm) {
-        frm.trigger('refresh');
-    },
-
-    test_plan_id(frm) {
-        frm.trigger('refresh');
+            frm.refresh_field('test_plan_and_script');
+            frappe.msgprint('Test Plans and Scripts added.');
+        });
+       
     }
 });
