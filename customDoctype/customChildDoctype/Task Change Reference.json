@@ -191,8 +191,8 @@
       "doctype": "DocField"
     }
   ],
-  "links": [],
+  "permissions": [],
   "actions": [],
   "states": [],
-  "permissions": []
+  "links": []
 }

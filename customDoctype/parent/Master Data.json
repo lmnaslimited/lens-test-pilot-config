@@ -142,9 +142,6 @@
       "doctype": "DocField"
     }
   ],
-  "links": [],
-  "actions": [],
-  "states": [],
   "permissions": [
     {
       "docstatus": 0,
@@ -172,5 +169,8 @@
       "set_user_permissions": 0,
       "doctype": "DocPerm"
     }
-  ]
+  ],
+  "actions": [],
+  "states": [],
+  "links": []
 }

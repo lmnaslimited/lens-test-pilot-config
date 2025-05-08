@@ -100,10 +100,10 @@
       "parentfield": "fields",
       "parenttype": "DocType",
       "idx": 2,
-      "fieldname": "test_script",
-      "label": "Test Script",
+      "fieldname": "test_plan_script",
+      "label": "Test Plan Script",
       "fieldtype": "Table",
-      "options": "Test Script",
+      "options": "Test Plan Script",
       "search_index": 0,
       "show_dashboard": 0,
       "hidden": 0,
@@ -144,49 +144,6 @@
       "doctype": "DocField"
     }
   ],
-  "links": [
-    {
-      "docstatus": 0,
-      "parent": "Test Plan",
-      "parentfield": "links",
-      "parenttype": "DocType",
-      "idx": 1,
-      "link_doctype": "Task",
-      "link_fieldname": "task",
-      "hidden": 0,
-      "is_child_table": 0,
-      "custom": 0,
-      "doctype": "DocType Link"
-    },
-    {
-      "docstatus": 0,
-      "parent": "Test Plan",
-      "parentfield": "links",
-      "parenttype": "DocType",
-      "idx": 2,
-      "link_doctype": "Test Run",
-      "link_fieldname": "name",
-      "hidden": 0,
-      "is_child_table": 0,
-      "custom": 0,
-      "doctype": "DocType Link"
-    },
-    {
-      "docstatus": 0,
-      "parent": "Test Plan",
-      "parentfield": "links",
-      "parenttype": "DocType",
-      "idx": 3,
-      "link_doctype": "Test Log",
-      "link_fieldname": "name",
-      "hidden": 0,
-      "is_child_table": 0,
-      "custom": 0,
-      "doctype": "DocType Link"
-    }
-  ],
-  "actions": [],
-  "states": [],
   "permissions": [
     {
       "docstatus": 0,
@@ -213,6 +170,36 @@
       "select": 0,
       "set_user_permissions": 0,
       "doctype": "DocPerm"
+    }
+  ],
+  "actions": [],
+  "states": [],
+  "links": [
+    {
+      "docstatus": 0,
+      "parent": "Test Plan",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 1,
+      "link_doctype": "Task",
+      "link_fieldname": "task",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
+    },
+    {
+      "docstatus": 0,
+      "parent": "Test Plan",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 2,
+      "link_doctype": "Test Lab",
+      "link_fieldname": "name",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
     }
   ]
 }
