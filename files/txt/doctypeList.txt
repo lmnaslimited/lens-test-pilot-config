@@ -4,9 +4,7 @@
 # Design
 Test Plan
 Test Lab
-Test Log
 Test Plan Reference
-Test Run
 Test Plan Script
 Test Lab Script
 Master Data
