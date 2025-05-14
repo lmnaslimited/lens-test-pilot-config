@@ -48,6 +48,37 @@
   "show_preview_popup": 1,
   "index_web_pages_for_search": 0,
   "doctype": "DocType",
+  "permissions": [
+    {
+      "docstatus": 0,
+      "parent": "Task",
+      "parentfield": "permissions",
+      "parenttype": "DocType",
+      "idx": 1,
+      "permlevel": 0,
+      "role": "Projects User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 0,
+      "cancel": 0,
+      "delete": 1,
+      "amend": 0,
+      "report": 1,
+      "export": 0,
+      "import": 0,
+      "share": 1,
+      "print": 1,
+      "email": 1,
+      "if_owner": 0,
+      "select": 0,
+      "set_user_permissions": 0,
+      "doctype": "DocPerm"
+    }
+  ],
+  "actions": [],
+  "states": [],
+  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -2311,36 +2342,5 @@
       "sort_options": 0,
       "doctype": "DocField"
     }
-  ],
-  "permissions": [
-    {
-      "docstatus": 0,
-      "parent": "Task",
-      "parentfield": "permissions",
-      "parenttype": "DocType",
-      "idx": 1,
-      "permlevel": 0,
-      "role": "Projects User",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "submit": 0,
-      "cancel": 0,
-      "delete": 1,
-      "amend": 0,
-      "report": 1,
-      "export": 0,
-      "import": 0,
-      "share": 1,
-      "print": 1,
-      "email": 1,
-      "if_owner": 0,
-      "select": 0,
-      "set_user_permissions": 0,
-      "doctype": "DocPerm"
-    }
-  ],
-  "actions": [],
-  "states": [],
-  "links": []
+  ]
 }

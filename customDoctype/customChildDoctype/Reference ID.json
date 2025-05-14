@@ -42,6 +42,10 @@
   "show_preview_popup": 0,
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
+  "permissions": [],
+  "actions": [],
+  "states": [],
+  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -70,8 +74,8 @@
       "show_preview_popup": 0,
       "permlevel": 0,
       "ignore_user_permissions": 0,
-      "columns": 0,
-      "in_list_view": 0,
+      "columns": 2,
+      "in_list_view": 1,
       "fetch_if_empty": 0,
       "in_filter": 0,
       "remember_last_selected_value": 0,
@@ -119,8 +123,8 @@
       "show_preview_popup": 0,
       "permlevel": 0,
       "ignore_user_permissions": 0,
-      "columns": 0,
-      "in_list_view": 0,
+      "columns": 2,
+      "in_list_view": 1,
       "fetch_if_empty": 0,
       "in_filter": 0,
       "remember_last_selected_value": 0,
@@ -141,9 +145,5 @@
       "sort_options": 0,
       "doctype": "DocField"
     }
-  ],
-  "permissions": [],
-  "actions": [],
-  "states": [],
-  "links": []
+  ]
 }
