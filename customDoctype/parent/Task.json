@@ -76,9 +76,6 @@
       "doctype": "DocPerm"
     }
   ],
-  "actions": [],
-  "states": [],
-  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -2342,5 +2339,8 @@
       "sort_options": 0,
       "doctype": "DocField"
     }
-  ]
+  ],
+  "actions": [],
+  "states": [],
+  "links": []
 }

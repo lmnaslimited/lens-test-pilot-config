@@ -43,9 +43,6 @@
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
   "permissions": [],
-  "actions": [],
-  "states": [],
-  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -194,5 +191,8 @@
       "fetch_from": "task.project",
       "doctype": "DocField"
     }
-  ]
+  ],
+  "actions": [],
+  "states": [],
+  "links": []
 }

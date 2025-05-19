@@ -44,9 +44,6 @@
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
   "permissions": [],
-  "actions": [],
-  "states": [],
-  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -447,5 +444,8 @@
       "sort_options": 0,
       "doctype": "DocField"
     }
-  ]
+  ],
+  "actions": [],
+  "states": [],
+  "links": []
 }
