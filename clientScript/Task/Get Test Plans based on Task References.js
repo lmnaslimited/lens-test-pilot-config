@@ -1,12 +1,12 @@
 frappe.ui.form.on('Task', {
     refresh(frm) {
         frm.clear_custom_buttons();
-
+        //Get the test plans by using the button
         if ((frm.doc.custom_task_change_reference || []).length) {
             frm.add_custom_button('Get Test Plans', () => fnFetchAndAddTestPlans(frm));
         }
     },
-
+    //Refresh the child table when adding and removing the task references
     custom_task_change_reference_add(frm) {
         frm.trigger('refresh');
     },
@@ -16,7 +16,7 @@ frappe.ui.form.on('Task', {
     }
 });
 
-
+//The purpose of the function is to add the test plans based on the refernce tasks
 async function fnFetchAndAddTestPlans(frm) {
     const LtaskReference = frm.doc.custom_task_change_reference || [];
     const LAtestPlanList = [];
@@ -33,9 +33,15 @@ async function fnFetchAndAddTestPlans(frm) {
         });
 
         const LAplans = LDresponse.message?.data || [];
+       
+        frm.clear_table('custom_test_plan_reference');
         LAplans.forEach(LplanRow => {
             if (LplanRow.test_plan && !LAtestPlanList.includes(LplanRow.test_plan)) {
-                LAtestPlanList.push(LplanRow.test_plan);
+                LAtestPlanList.push({
+                    test_plan: LplanRow.test_plan,
+                    test_plan_name: LplanRow.test_plan_name, 
+                    task: Lrow.task
+                });
             }
         });
     }
@@ -45,11 +51,18 @@ async function fnFetchAndAddTestPlans(frm) {
         return;
     }
 
+   //Remove the duplicate test plans that is present in different reference tasks
     const LAexistingPlans = (frm.doc.custom_test_plan_reference || []).map(Lrow => Lrow.test_plan);
 
     LAtestPlanList.forEach(Lplan => {
-        if (!LAexistingPlans.includes(Lplan)) {
-            frm.add_child('custom_test_plan_reference', { test_plan: Lplan });
+        
+        //Appending the values into the Test Plan Reference child table
+        if (!LAexistingPlans.includes(Lplan.test_plan)) {
+            frm.add_child('custom_test_plan_reference', {
+                test_plan: Lplan.test_plan,
+                test_plan_name: Lplan.test_plan_name,
+                task: Lplan.task
+            });
         }
         
     });

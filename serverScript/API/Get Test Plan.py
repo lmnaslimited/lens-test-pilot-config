@@ -10,7 +10,7 @@ ld_test_plan = frappe.get_all(
     'Task',
     fields=["name", "`tabTest Plan Reference`.test_plan"],
     filters={"name": ["in", [l_task_name]]},
-    order_by="`tabTask`.creation desc" 
+    order_by="`tabTest Plan Reference`.test_plan desc" 
 )
 
 # Return the test plans
