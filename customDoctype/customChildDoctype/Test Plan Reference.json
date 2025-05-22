@@ -42,6 +42,8 @@
   "is_calendar_and_gantt": 0,
   "force_re_route_to_default_view": 0,
   "doctype": "DocType",
+  "states": [],
+  "permissions": [],
   "fields": [
     {
       "docstatus": 0,
@@ -191,8 +193,6 @@
       "doctype": "DocField"
     }
   ],
-  "states": [],
-  "links": [],
   "actions": [],
-  "permissions": []
+  "links": []
 }
