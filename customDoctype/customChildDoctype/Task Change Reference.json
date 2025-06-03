@@ -43,7 +43,7 @@
   "force_re_route_to_default_view": 0,
   "doctype": "DocType",
   "states": [],
-  "permissions": [],
+  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -194,5 +194,5 @@
     }
   ],
   "actions": [],
-  "links": []
+  "permissions": []
 }
