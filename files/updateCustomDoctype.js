@@ -1,12 +1,13 @@
 /* eslint-disable */
-import { getEndPointForDoctype } from "./external.js";
+import { getEndPointForDoctype } from "./functions.js";
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-
-dotenv.config({path: '../../.env'});
+ 
+dotenv.config({ path: '../.env' });
+ 
 const myHeaders = new Headers();
-myHeaders.append("Authorization", process.env.HOST_KEY);
+myHeaders.append("Authorization", process.env.KEY);
 myHeaders.append("Content-Type", "application/json");
  
 const current_path = process.cwd();
@@ -34,13 +35,12 @@ function getAllowedFiles() {
  
 // Function to upload a JSON file
 async function uploadJsonFile(filePath) {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED=0
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const jsonData = JSON.parse(fileContent);
     const baseUrl = getEndPointForDoctype("Custom Doctype");
     const requestUrl = `${baseUrl}/${jsonData.name}`;
-    console.log(requestUrl)
+ 
     // Try PUT request first
     const putResponse = await fetch(requestUrl, {
       method: "PUT",
