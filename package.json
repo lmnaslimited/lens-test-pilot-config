@@ -5,6 +5,7 @@
   "main": "getClientScript.js",
   "type": "module",
   "scripts": {
+    
     "start": "cd files && node putClientScript.js && node putServerScript.js && node putReport.js",
     "get": "cd files && node getClientScript.js && node getServerScript.js",
     "upload": "cd files && node updateCustomDoctype.js && node uploadClientScript.js && node uploadServerScript.js ", 
@@ -12,7 +13,9 @@
     "get_field": "cd files && node getCustomField.js",
     "update_field": "cd files && node updateCustomField.js",
     "get_doctype": "cd files && node getCustomDoctype.js",
-    "update_doctype":"cd files && node updateCustomDoctype.js"
+    "update_doctype":"cd files && node updateCustomDoctype.js",
+    "update_testlab_dt":"cd files && node updateTestLabDoctype.js",
+    "upload_testlab": "cd files && node updateCustomDoctype.js && node updateCustomField.js && node uploadClientScript.js && node uploadServerScript.js"
   },
   "author": "Your Name",
   "license": "MIT",
