@@ -11,3 +11,5 @@ Master Data
 Task Change Reference
 Reference ID
 Task
+Test Log
+Test Run

@@ -44,8 +44,6 @@
   "default_view": "List",
   "force_re_route_to_default_view": 0,
   "doctype": "DocType",
-  "states": [],
-  "links": [],
   "fields": [
     {
       "docstatus": 0,
@@ -121,6 +119,7 @@
       "permlevel": 0,
       "ignore_user_permissions": 0,
       "columns": 0,
+      "default": "Test",
       "in_list_view": 0,
       "fetch_if_empty": 0,
       "in_filter": 0,
@@ -338,6 +337,8 @@
       "doctype": "DocField"
     }
   ],
+  "links": [],
+  "states": [],
   "actions": [],
   "permissions": [
     {

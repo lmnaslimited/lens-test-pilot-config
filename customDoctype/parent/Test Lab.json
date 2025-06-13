@@ -45,45 +45,6 @@
   "default_view": "List",
   "force_re_route_to_default_view": 0,
   "doctype": "DocType",
-  "states": [
-    {
-      "docstatus": 0,
-      "idx": 1,
-      "title": "Passed",
-      "color": "Green",
-      "custom": 0,
-      "parent": "Test Lab",
-      "parentfield": "states",
-      "parenttype": "DocType",
-      "doctype": "DocType State"
-    },
-    {
-      "docstatus": 0,
-      "idx": 2,
-      "title": "Not Started",
-      "color": "Blue",
-      "custom": 0,
-      "parent": "Test Lab",
-      "parentfield": "states",
-      "parenttype": "DocType",
-      "doctype": "DocType State"
-    }
-  ],
-  "links": [
-    {
-      "docstatus": 0,
-      "parent": "Test Lab",
-      "parentfield": "links",
-      "parenttype": "DocType",
-      "idx": 1,
-      "link_doctype": "Test Run",
-      "link_fieldname": "test_lab",
-      "hidden": 0,
-      "is_child_table": 0,
-      "custom": 0,
-      "doctype": "DocType Link"
-    }
-  ],
   "fields": [
     {
       "docstatus": 0,
@@ -471,6 +432,45 @@
       "show_dashboard": 0,
       "sort_options": 0,
       "doctype": "DocField"
+    }
+  ],
+  "links": [
+    {
+      "docstatus": 0,
+      "parent": "Test Lab",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 1,
+      "link_doctype": "Test Run",
+      "link_fieldname": "test_lab",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
+    }
+  ],
+  "states": [
+    {
+      "docstatus": 0,
+      "idx": 1,
+      "title": "Passed",
+      "color": "Green",
+      "custom": 0,
+      "parent": "Test Lab",
+      "parentfield": "states",
+      "parenttype": "DocType",
+      "doctype": "DocType State"
+    },
+    {
+      "docstatus": 0,
+      "idx": 2,
+      "title": "Not Started",
+      "color": "Blue",
+      "custom": 0,
+      "parent": "Test Lab",
+      "parentfield": "states",
+      "parenttype": "DocType",
+      "doctype": "DocType State"
     }
   ],
   "actions": [],
