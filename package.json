@@ -15,7 +15,7 @@
     "get_doctype": "cd files && node getCustomDoctype.js",
     "update_doctype":"cd files && node updateCustomDoctype.js",
     "update_testlab_dt":"cd files && node updateTestLabDoctype.js",
-    "upload_testlab": "cd files && node updateCustomDoctype.js && node updateCustomField.js && node uploadClientScript.js && node uploadServerScript.js"
+    "upload_testlab": "cd files && node updateTestLabDoctype.js && node updateCustomField.js && node uploadClientScript.js && node uploadServerScript.js"
   },
   "author": "Your Name",
   "license": "MIT",

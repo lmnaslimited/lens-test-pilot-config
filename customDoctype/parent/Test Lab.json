@@ -434,7 +434,21 @@
       "doctype": "DocField"
     }
   ],
-  "links": [],
+  "links": [
+    {
+      "docstatus": 0,
+      "parent": "Test Lab",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 1,
+      "link_doctype": "Test Run",
+      "link_fieldname": "test_lab",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
+    }
+  ],
   "states": [
     {
       "docstatus": 0,

@@ -243,7 +243,34 @@
       "doctype": "DocField"
     }
   ],
-  "links": [],
+  "links": [
+    {
+      "docstatus": 0,
+      "parent": "Test Plan",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 1,
+      "link_doctype": "Task",
+      "link_fieldname": "test_plan",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
+    },
+    {
+      "docstatus": 0,
+      "parent": "Test Plan",
+      "parentfield": "links",
+      "parenttype": "DocType",
+      "idx": 2,
+      "link_doctype": "Test Lab",
+      "link_fieldname": "reference_name",
+      "hidden": 0,
+      "is_child_table": 0,
+      "custom": 0,
+      "doctype": "DocType Link"
+    }
+  ],
   "states": [],
   "actions": [],
   "permissions": [
