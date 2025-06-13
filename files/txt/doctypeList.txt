@@ -2,14 +2,4 @@
 # Example:
 
 # Design
-Test Plan
-Test Lab
-Test Plan Reference
-Test Plan Script
-Test Lab Script
-Master Data
-Task Change Reference
-Reference ID
 Task
-Test Log
-Test Run
