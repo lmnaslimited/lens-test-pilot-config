@@ -6,7 +6,6 @@ dotenv.config({path: '../../.env'});
 export function getEndPointForDoctype(doctype){
   const current_path = process.cwd()
   const host = process.env.HOST_URL
-  const target = process.env.TARGET_URL
 
   var endpoint
   switch(doctype){
@@ -28,10 +27,6 @@ export function getEndPointForDoctype(doctype){
 
   }
   
-  if(doctype === "Server Script"){
-    var baseUrl = `${target}/api/resource/${endpoint}`
-  } else {
-    var baseUrl = `${host}/api/resource/${endpoint}`
-  }
+  var baseUrl = `${host}/api/resource/${endpoint}`
   return baseUrl
 }
