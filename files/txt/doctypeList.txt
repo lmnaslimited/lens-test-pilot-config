@@ -3,5 +3,16 @@
 
 # Design
 Site Details
-Test Case Configurator
 Test Fields
+Test Case Configurator
+Master Data
+Task Change Reference
+Task
+Test Plan Script
+Test Plan
+Test Log
+Test Lab Script
+Test Plan Reference
+Reference ID
+Test Lab
+Test Run

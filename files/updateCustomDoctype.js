@@ -112,4 +112,3 @@ async function processJsonFiles(directory, allowedFiles) {
  
   await processJsonFiles(customDoctypeFolderPath, allowedFiles);
 })();
- 
