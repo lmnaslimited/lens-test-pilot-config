@@ -35,7 +35,7 @@ if l_get_test_script == "get_test_data" and l_test_lab_id:
     ld_new_doc.insert()
     frappe.db.commit()
     # Fetch the created test run document
-    ld_test_run_doc = frappe.get_doc("Test Run", "TR-0006")  # Replace "TR-0006" this with "{ld_new_doc.name}"
+    ld_test_run_doc = frappe.get_doc("Test Run", {ld_new_doc.name})  # Replace "TR-0006" this with "{ld_new_doc.name}"
     # Loop through test_log and collect relevant entries in a single array
     for log in ld_test_run_doc.get("test_log", []):
         if log.test_script:
