@@ -1,0 +1,20 @@
+{
+  "name": "TP-0001-Quotation",
+  "docstatus": 0,
+  "idx": 0,
+  "naming_series": "TP.-.####.-.{main_doctype}",
+  "title": "Sample Test Plan",
+  "main_doctype": "Quotation",
+  "doctype": "Test Plan",
+  "test_plan_script": [
+    {
+      "docstatus": 0,
+      "idx": 1,
+      "test_script": "Sample Test",
+      "parent": "TP-0001-Quotation",
+      "parentfield": "test_plan_script",
+      "parenttype": "Test Plan",
+      "doctype": "Test Plan Script"
+    }
+  ]
+}
