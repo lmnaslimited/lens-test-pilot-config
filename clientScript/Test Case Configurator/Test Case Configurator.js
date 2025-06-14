@@ -5,7 +5,7 @@ frappe.ui.form.on('Test Case Configurator', {
         const L_PREVITEM = frm.doc.test_fields[idItem.idx - 2];
         if (idItem.idx === 1) {
             idItem.pos = 10;
-        } else if (idItem.is_child) {
+        } else if (idItem.is_child && !idItem.action) {
             // Child ldRows increment by 0.01
             idItem.pos = L_PREVITEM ? L_PREVITEM.pos + 0.01 : 10.01;
         } else {
@@ -43,8 +43,9 @@ frappe.ui.form.on('Test Case Configurator', {
        fnSetDependsOnMandatory(frm);
        if (frm.doc.json_response) {
             const LA_FIELDNAMES = fnGetAllFieldNames(frm.doc.json_response);
+            const LA_CHILDNAMES = fnGetUniqueChildNames(frm.doc.json_response);
             frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", LA_FIELDNAMES.join("\n"));
-
+            frm.fields_dict["test_fields"].grid.update_docfield_property("child_name", "options", LA_CHILDNAMES.join("\n"));
         }
     }
 });
@@ -167,7 +168,7 @@ function fnProcessJsonResponse(frm, idData) {
         }
 
         if (ldField.fieldtype === "Section Break") {
-            laSectionLabels.add(ldField.fieldname);  
+            laSectionLabels.add(ldField.label);  
         }
 
         if (!LA_NOTINCLUDE.includes(ldField.fieldtype)) {
