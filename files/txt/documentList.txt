@@ -10,3 +10,5 @@
 
 document/Test Case Configurator
 document/Site Details
+document/Test Plan
+document/Test Lab
