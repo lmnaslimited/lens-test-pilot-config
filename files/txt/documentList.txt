@@ -8,7 +8,8 @@
 # To get the document, we use the format "Document = Doctype."
 # To update the document, we use the format "document/doctype."
 
-document/Test Case Configurator
 document/Site Details
+document/Test Case Configurator
+document/Master Data
 document/Test Plan
 document/Test Lab

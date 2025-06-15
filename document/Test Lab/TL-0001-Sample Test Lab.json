@@ -6,19 +6,6 @@
   "status": "Not Started",
   "naming_series": "TL.-.####.-.{title}",
   "doctype": "Test Lab",
-  "test_lab_script": [
-    {
-      "docstatus": 0,
-      "idx": 1,
-      "test_plan": "TP-0001-Quotation",
-      "test_script": "Sample Test",
-      "results": "",
-      "parent": "TL-0001-Sample Test Lab",
-      "parentfield": "test_lab_script",
-      "parenttype": "Test Lab",
-      "doctype": "Test Lab Script"
-    }
-  ],
   "reference_by": [
     {
       "docstatus": 0,
@@ -29,6 +16,20 @@
       "parentfield": "reference_by",
       "parenttype": "Test Lab",
       "doctype": "Reference ID"
+    }
+  ],
+  "test_lab_script": [
+    {
+      "docstatus": 0,
+      "idx": 1,
+      "test_plan": "TP-0001-Quotation",
+      "test_script": "Sample Test",
+      "master_data": "Sample Master Data",
+      "results": "",
+      "parent": "TL-0001-Sample Test Lab",
+      "parentfield": "test_lab_script",
+      "parenttype": "Test Lab",
+      "doctype": "Test Lab Script"
     }
   ]
 }
