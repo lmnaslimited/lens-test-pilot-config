@@ -81,30 +81,6 @@
       "parentfield": "test_fields",
       "parenttype": "Test Case Configurator",
       "doctype": "Test Fields"
-    },
-    {
-      "docstatus": 0,
-      "idx": 4,
-      "pos": 10.03,
-      "is_child": 0,
-      "child_name": "",
-      "child_index": 0,
-      "field_name": "currency",
-      "value": "INR",
-      "message_type": "",
-      "tab": "",
-      "action": "",
-      "section": "currency_and_price_list",
-      "data_type": "Currency",
-      "add_row": 0,
-      "allow_on_submit": 0,
-      "is_read_only": 0,
-      "is_mandatory": 0,
-      "is_hidden": 0,
-      "parent": "Sample Test",
-      "parentfield": "test_fields",
-      "parenttype": "Test Case Configurator",
-      "doctype": "Test Fields"
     }
   ]
 }
