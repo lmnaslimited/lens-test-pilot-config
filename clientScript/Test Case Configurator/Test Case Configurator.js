@@ -327,6 +327,11 @@ frappe.ui.form.on('Test Fields', {
             // Recalculate pos after action is triggered
             frm.events.fnGetPos(frm, LD_ITEM); 
         }
+        // Whenever the Create Doc action is clicked, Specify the doctype for creation
+        if (LD_ITEM.action === "Create Doc" && frm.doc.doctype_to_be_tested) {
+            const LformattedValue = frm.doc.doctype_to_be_tested.toLowerCase().replace(/\s+/g, '-');
+            frappe.model.set_value(cdt, cdn, "value", LformattedValue);
+        }
     },
     test_fields_add(frm, cdt, cdn) {
         // Get only parent fields

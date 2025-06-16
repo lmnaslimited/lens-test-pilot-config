@@ -1,15 +1,15 @@
 /* eslint-disable */
-import { getEndPointForDoctype } from "./external.js";
+import { getEndPointForDoctype } from "./functions.js";
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-dotenv.config({path: '../../.env'});
+dotenv.config({path: '../.env'});
 
 const baseFolder = '../serverScript';
 
 const headers = {
   'Content-Type': 'application/json',
-  'Authorization': process.env.HOST_KEY
+  'Authorization': process.env.KEY
 };
 
 const baseUrl = getEndPointForDoctype("Server Script");
