@@ -61,7 +61,7 @@ frappe.ui.form.on('Test Run', {
                 progress_class: "progress-bar-warning"
             });
         }        // Create message summary
-        let lMessage = `:white_tick: Passed: ${lPass} &nbsp;&nbsp; :x: Failed: ${lFail} &nbsp;&nbsp; :hourglass_flowing_sand: Not Started: ${lNotStarted}`;        // Creating the Progress bar based on the result metrics (Pass, Fail, Not Started)
+        let lMessage = `Passed: ${lPass} &nbsp;&nbsp; Failed: ${lFail} &nbsp;&nbsp; Not Started: ${lNotStarted}`;        // Creating the Progress bar based on the result metrics (Pass, Fail, Not Started)
         if (frm.dashboard) {
             frm.dashboard.reset();
             frm.dashboard.add_progress(__("Test Log Progress"), laBars, lMessage);
