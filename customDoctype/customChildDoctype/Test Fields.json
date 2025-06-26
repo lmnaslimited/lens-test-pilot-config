@@ -3,13 +3,13 @@
   "docstatus": 0,
   "idx": 0,
   "issingle": 0,
+  "is_virtual": 0,
   "is_tree": 0,
   "istable": 1,
   "editable_grid": 1,
   "track_changes": 0,
   "module": "Custom",
   "naming_rule": "",
-  "name_case": "",
   "sort_field": "modified",
   "sort_order": "DESC",
   "read_only": 0,
@@ -34,7 +34,7 @@
   "is_calendar_and_gantt": 0,
   "quick_entry": 0,
   "track_views": 0,
-  "is_virtual": 0,
+  "queue_in_background": 0,
   "allow_events_in_timeline": 0,
   "allow_auto_repeat": 0,
   "make_attachments_public": 0,
@@ -42,6 +42,7 @@
   "show_preview_popup": 0,
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
+  "permissions": [],
   "fields": [
     {
       "docstatus": 0,
@@ -89,6 +90,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -138,6 +141,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -187,6 +192,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -235,6 +242,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -285,6 +294,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -333,6 +344,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -382,6 +395,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -431,6 +446,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -480,6 +497,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -529,6 +548,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -578,6 +599,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -625,6 +648,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -674,6 +699,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -723,6 +750,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -771,6 +800,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -819,6 +850,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -868,6 +901,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -917,6 +952,8 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     },
     {
@@ -966,11 +1003,12 @@
       "non_negative": 0,
       "is_virtual": 0,
       "sort_options": 0,
+      "show_on_timeline": 0,
+      "make_attachment_public": 0,
       "doctype": "DocField"
     }
   ],
+  "actions": [],
   "links": [],
-  "states": [],
-  "permissions": [],
-  "actions": []
+  "states": []
 }
