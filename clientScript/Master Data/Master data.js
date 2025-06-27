@@ -15,10 +15,10 @@ frappe.ui.form.on('Master Data', {
 
                     //  Copy child table: test_fields → test_filed
                     if (ldSource.test_fields && ldSource.test_fields.length > 0) {
-                        frm.clear_table('test_filed');
+                        frm.clear_table('actual_test_data');
 
                         ldSource.test_fields.forEach(row => {
-                            let new_row = frm.add_child('test_filed');
+                            let new_row = frm.add_child('actual_test_data');
                             new_row.pos = row.pos;
                             new_row.is_child = row.is_child;
                             new_row.child_name = row.child_name;
@@ -39,7 +39,7 @@ frappe.ui.form.on('Master Data', {
                             new_row.is_hidden = row.is_hidden;
                         });
 
-                        frm.refresh_field('test_filed');
+                        frm.refresh_field('actual_test_data');
                     }
                 });
         }
