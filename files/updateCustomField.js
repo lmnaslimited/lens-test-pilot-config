@@ -1,13 +1,13 @@
 /* eslint-disable */
 import fs from 'fs';
-import { getEndPointForDoctype } from './functions.js';
+import { getEndPointForDoctype } from './external.js';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
 
 const myHeaders = new Headers();
-myHeaders.append("Authorization", process.env.KEY);
+myHeaders.append("Authorization", process.env.HOST_KEY);
 myHeaders.append("Content-Type", "application/json");
 
 const requestOptionsPUT = {
