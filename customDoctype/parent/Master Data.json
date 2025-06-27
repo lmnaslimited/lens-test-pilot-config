@@ -44,33 +44,6 @@
   "show_preview_popup": 0,
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
-  "permissions": [
-    {
-      "docstatus": 0,
-      "parent": "Master Data",
-      "parentfield": "permissions",
-      "parenttype": "DocType",
-      "idx": 1,
-      "permlevel": 0,
-      "role": "System Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "submit": 0,
-      "cancel": 0,
-      "delete": 1,
-      "amend": 0,
-      "report": 1,
-      "export": 1,
-      "import": 0,
-      "share": 1,
-      "print": 1,
-      "email": 1,
-      "if_owner": 0,
-      "select": 0,
-      "doctype": "DocPerm"
-    }
-  ],
   "fields": [
     {
       "docstatus": 0,
@@ -686,10 +659,10 @@
       "parentfield": "fields",
       "parenttype": "DocType",
       "idx": 13,
-      "fieldname": "test_filed",
-      "label": "Test filed",
+      "fieldname": "actual_test_data",
+      "label": "Actual Test Data",
       "fieldtype": "Table",
-      "options": "Copied Fields",
+      "options": "Actual Test Data",
       "search_index": 0,
       "show_dashboard": 0,
       "hidden": 0,
@@ -732,7 +705,34 @@
       "doctype": "DocField"
     }
   ],
-  "actions": [],
+  "permissions": [
+    {
+      "docstatus": 0,
+      "parent": "Master Data",
+      "parentfield": "permissions",
+      "parenttype": "DocType",
+      "idx": 1,
+      "permlevel": 0,
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 0,
+      "cancel": 0,
+      "delete": 1,
+      "amend": 0,
+      "report": 1,
+      "export": 1,
+      "import": 0,
+      "share": 1,
+      "print": 1,
+      "email": 1,
+      "if_owner": 0,
+      "select": 0,
+      "doctype": "DocPerm"
+    }
+  ],
   "links": [],
-  "states": []
+  "states": [],
+  "actions": []
 }
