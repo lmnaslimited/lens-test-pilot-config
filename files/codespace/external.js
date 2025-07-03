@@ -1,7 +1,7 @@
 /* eslint-disable */
 import dotenv from 'dotenv';
 
-dotenv.config({path: '../../.env'});
+dotenv.config({path: '../../../.env'});
 
 export function getEndPointForDoctype(doctype){
   const current_path = process.cwd()

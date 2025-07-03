@@ -4,7 +4,7 @@ import { getEndPointForDoctype } from "./external.js";
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: '../../../.env' });
 
 const baseFolder = '../clientScript';
 

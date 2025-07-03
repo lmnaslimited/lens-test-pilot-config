@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: '../../../.env' });
 
 const myHeaders = new Headers();
 myHeaders.append("Authorization", process.env.HOST_KEY);
@@ -32,7 +32,6 @@ function getDoctypeNames() {
   }
 }
 
-// ─── Upload JSON File ────────────────────────────────
 async function uploadJsonFile(filePath, doctypeName) {
   try {
     if (!fs.existsSync(filePath)) {
@@ -42,10 +41,15 @@ async function uploadJsonFile(filePath, doctypeName) {
 
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const jsonData = JSON.parse(fileContent);
+
+    // Remove or clear links
+    if ('links' in jsonData) {
+      jsonData.links = []; // or: delete jsonData.links;
+    }
+
     const baseUrl = getEndPointForDoctype("Custom Doctype");
     const requestUrl = `${baseUrl}/${jsonData.name}`;
 
-    // Try PUT request first
     const putResponse = await fetch(requestUrl, {
       method: "PUT",
       headers: myHeaders,

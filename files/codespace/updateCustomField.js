@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { getEndPointForDoctype } from "./functions.js";
-
-import dotenv from 'dotenv';
 import fs from 'fs';
+import { getEndPointForDoctype } from './external.js';
+import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config();
+
+dotenv.config({ path: '../../../.env' });
 
 const myHeaders = new Headers();
 myHeaders.append("Authorization", process.env.HOST_KEY);
