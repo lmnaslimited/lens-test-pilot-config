@@ -33,7 +33,7 @@ function createNewResource(requestBody) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
       } else {
-        console.log(`New script created`);
+        console.log(`New Server script created`);
         // Mark the report as created
       }
     })

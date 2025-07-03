@@ -102,7 +102,6 @@ function findJsonFilePath(doctypeName) {
   for (const name of doctypeNames) {
     const filePath = findJsonFilePath(name);
     if (filePath) {
-      console.log(`Processing Doctype: ${name}`);
       await uploadJsonFile(filePath, name);
     } else {
       console.warn(`File not found for Doctype: ${name}`);

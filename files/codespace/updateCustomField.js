@@ -82,7 +82,6 @@ async function updateCustomField(field) {
   const fieldUrl = `${url}/${customFieldName}`; // API URL to update the custom field
 
   try {
-    console.log(`Updating custom field: ${customFieldName}`);
     const response = await fetch(fieldUrl, {
       ...requestOptionsPUT,
       body: JSON.stringify(field) // Send the field data in the request body
@@ -91,7 +90,6 @@ async function updateCustomField(field) {
     if (response.ok) {
       console.log(`Successfully updated custom field: ${customFieldName}`);
     } else if (response.status === 404) {
-      console.warn(`Custom field not found for update: ${customFieldName}. Attempting to create it via POST.`);
       await createCustomField(field);
     } else {
       console.error(`Failed to update custom field: ${customFieldName}`, await response.text());
