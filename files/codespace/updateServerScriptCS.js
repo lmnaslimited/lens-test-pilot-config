@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 dotenv.config({ path: '../../../.env' });
 
-const baseFolder = '../serverScript';
+const baseFolder = '../../serverScript';
 
 const headers = {
   'Content-Type': 'application/json',

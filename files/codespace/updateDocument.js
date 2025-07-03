@@ -11,7 +11,7 @@ myHeaders.append("Authorization", process.env.HOST_KEY);
 myHeaders.append("Content-Type", "application/json"); // Set the content type
 
 // Get the project root directory dynamically
-const rootPath = path.resolve(process.cwd(), '..');
+const rootPath = path.resolve(process.cwd(), '..', '..');
 const filesListPath = path.join(process.cwd(), 'txt', 'documentList.txt'); // Path to documentList.txt
 
 // Function to upload a JSON file

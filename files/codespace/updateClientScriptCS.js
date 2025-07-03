@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 dotenv.config({ path: '../../../.env' });
 
-const baseFolder = '../clientScript';
+const baseFolder = '../../clientScript';
 
 const myHeaders = new Headers();
 myHeaders.append("Authorization", process.env.HOST_KEY);

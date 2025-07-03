@@ -11,7 +11,7 @@ myHeaders.append("Authorization", process.env.HOST_KEY);
 myHeaders.append("Content-Type", "application/json");
 
 const current_path = process.cwd();
-const customDoctypeFolderPath = path.join(current_path, '..', 'customDoctype');
+const customDoctypeFolderPath = path.join(current_path, '..', '..', 'customDoctype');
 
 // ─── Read Doctype List from TXT ──────────────────────
 function getDoctypeNames() {
