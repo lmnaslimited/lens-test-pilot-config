@@ -32,9 +32,6 @@ function createNewResource(requestBody) {
         } else {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      } else {
-        console.log(`New Server script created`);
-        // Mark the report as created
       }
     })
     .catch(error => {
@@ -119,14 +116,12 @@ function processFilesInFolder(folderPath, parentFolder = null) {
                 return response.json();
               })
               .then(result => {
-                console.log(`Processing changed file: ${file}`);
+                console.log(`Processing Server Script: ${file}`);
               })
               .catch(error => {
                 console.error(`Error processing changed file ${file}:`, error);
               });
           }
-        } else {
-          console.log(`Skipping file ${file} as .meta file does not exist at path: ${metaFilePath}`);
         }
       }
     }

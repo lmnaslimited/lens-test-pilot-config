@@ -59,7 +59,6 @@ async function uploadJsonFile(filePath, doctypeName) {
     if (putResponse.ok) {
       console.log('Updated document:', jsonData.name);
     } else if (putResponse.status === 404) {
-      console.log(`Document not found for ${jsonData.name}. Trying to create it...`);
 
       const postResponse = await fetch(baseUrl, {
         method: "POST",
@@ -107,8 +106,6 @@ function findJsonFilePath(doctypeName) {
     const filePath = findJsonFilePath(name);
     if (filePath) {
       await uploadJsonFile(filePath, name);
-    } else {
-      console.warn(`File not found for Doctype: ${name}`);
     }
   }
 })();
