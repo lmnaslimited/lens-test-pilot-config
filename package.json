@@ -11,7 +11,7 @@
     "upload": "cd files && node updateCustomDoctype.js && node uploadClientScript.js && node uploadServerScript.js ", 
     "upload_testdata": "cd files && node updateDocument.js",
     "get_field": "cd files && node getCustomField.js",
-    "update_field": "cd files && node updateCustomField.js",
+    "update_field": "cd files/codespace && node updateCustomField.js",
     "get_doctype": "cd files && node getCustomDoctype.js",
     "update_doctype":"cd files && node updateCustomDoctype.js",
     "create_testlab": "cd files && node createTestLabDoctype.js",
