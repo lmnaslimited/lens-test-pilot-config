@@ -15,6 +15,6 @@ Test Lab Script
 Test Plan Reference
 Reference ID
 Test Lab
-Test Run
 Log Entries
 Run Log
+Test Run
