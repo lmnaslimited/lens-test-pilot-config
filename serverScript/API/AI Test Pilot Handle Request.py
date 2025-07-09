@@ -4,25 +4,27 @@ l_test_script = frappe.form_dict.get("i_test_script")
 l_test_lab_id = frappe.form_dict.get("i_test_lab")
 l_get_test_script = frappe.form_dict.get("i_action")
 
-# Fetch only if master_data is provided
+# Optional: Fetch specific Master Data if provided
 if l_master_data_id:
-    l_master_data = frappe.get_list("Master Data", filters={"name": l_master_data_id}, fields=["*"])
+    l_master_data = frappe.get_list(
+        "Master Data",
+        filters={"name": l_master_data_id},
+        fields=["*"]
+    )
 
-# Fetch test script data if provided
+# Optional: Fetch specific Test Script if provided
 if l_test_script:
-    l_scripts = frappe.get_list("Test Case Configurator", filters={"name": l_test_script}, fields=["*"])
+    l_scripts = frappe.get_list(
+        "Test Case Configurator",
+        filters={"name": l_test_script},
+        fields=["*"]
+    )
 
-# Always fetch test lab data if provided
-if l_test_lab_id:
-    l_test_lab = frappe.get_list("Test Lab", filters={"name": l_test_lab_id}, fields=["*"])
+# Initialize output dictionary
+output = {}
 
-# Initialize data containers
-la_scripts_data = []
-
-# Create or reuse Test Run if action is 'get_test_data' and test_lab_id is provided
+# Action: get_test_data → Fetch or create Test Run and collect Master Data
 if l_get_test_script == "get_test_data" and l_test_lab_id:
-
-    # Check for an existing active Test Run (now using active_run)
     existing_active_runs = frappe.get_list(
         "Test Run",
         filters={
@@ -34,33 +36,39 @@ if l_get_test_script == "get_test_data" and l_test_lab_id:
     )
 
     if existing_active_runs:
-        # Reuse the existing active Test Run
         test_run_name = existing_active_runs[0].name
     else:
-        # No active run found, create a new Test Run
-        ld_new_doc = frappe.get_doc({"doctype": "Test Run", "test_lab": l_test_lab_id})
+        # Create a new Test Run if no active one exists
+        ld_new_doc = frappe.get_doc({
+            "doctype": "Test Run",
+            "test_lab": l_test_lab_id
+        })
         ld_new_doc.insert()
         frappe.db.commit()
         test_run_name = ld_new_doc.name
 
-    # Fetch the Test Run document (existing or newly created)
+    # Fetch the Test Run document
     ld_test_run_doc = frappe.get_doc("Test Run", test_run_name)
 
-    # Loop through test_log entries and collect Master Data
+    # Collect related Master Data from the Test Run's test_log child table
+    la_scripts_data = []
     for log in ld_test_run_doc.get("test_log", []):
         if log.test_script and log.master_data:
-            master_data_name = log.master_data  # This is expected to be the name of a Master Data document
+            master_data_doc = frappe.get_doc("Master Data", log.master_data)
+            la_scripts_data.append(master_data_doc.as_dict())
 
-            try:
-                master_data_doc = frappe.get_doc("Master Data", master_data_name)
-                la_scripts_data.append(master_data_doc.as_dict())
-            except frappe.DoesNotExistError:
-                frappe.log_error(f"Master Data '{master_data_name}' not found.", "Data Fetch Error")
+    # Set output for get_test_data
+    output = {
+        "test_run": ld_test_run_doc.as_dict(),
+        "master_data": la_scripts_data
+    }
 
-# Return the collected master data as response
-output = {
-    "test_run": ld_test_run_doc,
-    "master_data": la_scripts_data
-}
+# Action: get_test_lab → Fetch full Test Lab including child table `test_lab_script`
+elif l_get_test_script == "get_test_lab" and l_test_lab_id:
+    test_lab_doc = frappe.get_doc("Test Lab", l_test_lab_id)
+    output = {
+        "test_lab": test_lab_doc.as_dict()
+    }
 
+# Return the appropriate output
 frappe.response['message'] = output
