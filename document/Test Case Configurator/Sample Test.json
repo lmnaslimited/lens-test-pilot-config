@@ -5,7 +5,7 @@
   "title": "Sample Test",
   "sequence": 1,
   "depends_on": 0,
-  "site": "",
+  "site": "https://qsgbcz.docker.localhost",
   "doctype_to_be_tested": "Quotation",
   "action": "Create",
   "client_name": "Host",
