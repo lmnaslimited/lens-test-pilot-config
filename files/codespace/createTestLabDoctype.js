@@ -47,6 +47,10 @@ async function uploadJsonFile(filePath, doctypeName) {
       jsonData.links = []; // or: delete jsonData.links;
     }
 
+    if (jsonData.name === "Run Log" && Array.isArray(jsonData.fields)) {
+      jsonData.fields = jsonData.fields.filter(field => field.label !== "Test Run");
+    }
+
     const baseUrl = getEndPointForDoctype("Custom Doctype");
     const requestUrl = `${baseUrl}/${jsonData.name}`;
 
