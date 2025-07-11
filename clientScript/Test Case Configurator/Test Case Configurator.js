@@ -185,7 +185,6 @@ function fnProcessJsonResponse(frm, idData) {
         let ldChildMeta = ldChildField.meta;
         if (ldChildMeta) {
              for (let ldMetaField of ldChildMeta.fields) {
-                console.log("ldMetaField", ldMetaField);
                 if (ldMetaField.fieldtype === "Tab Break") {
                     laTabNames.add(ldMetaField.label);
                 }

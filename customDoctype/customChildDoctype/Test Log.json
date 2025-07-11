@@ -43,8 +43,8 @@
   "show_preview_popup": 0,
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
-  "permissions": [],
   "actions": [],
+  "permissions": [],
   "fields": [
     {
       "docstatus": 0,

@@ -16,6 +16,13 @@ frappe.ui.form.on('Master Data', {
                     if (ldSource.document) {
                         frm.set_value('document', ldSource.document);
                     }
+                    
+                    if (ldSource.is_workflow_test_script) {
+                        frm.set_value('is_workflow_test_script', ldSource.is_workflow_test_script);
+                    }
+                    if (ldSource.workflow_user) {
+                        frm.set_value('workflow_user', ldSource.workflow_user);
+                    }
 
                     // Copy child table data from Test Case Configurator to Master Data
                     if (ldSource.test_fields && ldSource.test_fields.length > 0) {
