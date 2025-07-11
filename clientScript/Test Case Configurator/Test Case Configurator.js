@@ -30,9 +30,9 @@ frappe.ui.form.on('Test Case Configurator', {
     },
 
     // When sequence is updated, set the "depends_on" field to mandatory if needed
-    sequence: function(frm){
-        fnSetDependsOnMandatory(frm);
-    },
+    // sequence: function(frm){
+    //     fnSetDependsOnMandatory(frm);
+    // },
     
     refresh(frm) {
 
@@ -40,7 +40,7 @@ frappe.ui.form.on('Test Case Configurator', {
            fnFetchDoctypeDetails(frm); 
            fnFetchDoctypeList(frm);
        }
-       fnSetDependsOnMandatory(frm);
+    //   fnSetDependsOnMandatory(frm);
        if (frm.doc.json_response) {
             const LA_FIELDNAMES = fnGetAllFieldNames(frm.doc.json_response);
             const LA_CHILDNAMES = fnGetUniqueChildNames(frm.doc.json_response);
@@ -50,16 +50,16 @@ frappe.ui.form.on('Test Case Configurator', {
     }
 });
 
-function fnSetDependsOnMandatory(frm) {
-    // If the sequence value is greater than 0
-    // set the depends on as mandatory.
-    if (frm.doc.sequence > 0) {
-        frm.fields_dict['depends_on'].df.reqd = 1;  
-    } else {
-        frm.fields_dict['depends_on'].df.reqd = 0;  
-    }
-    frm.refresh_field('depends_on');
-}
+// function fnSetDependsOnMandatory(frm) {
+//     // If the sequence value is greater than 0
+//     // set the depends on as mandatory.
+//     if (frm.doc.sequence > 0) {
+//         frm.fields_dict['depends_on'].df.reqd = 1;  
+//     } else {
+//         frm.fields_dict['depends_on'].df.reqd = 0;  
+//     }
+//     frm.refresh_field('depends_on');
+// }
 
 function fnFetchDoctypeList(frm) {
     //Get the doctypes from the site details 
