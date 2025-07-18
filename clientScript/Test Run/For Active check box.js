@@ -14,7 +14,6 @@ frappe.ui.form.on('Test Run', {
                 },
                 callback: function(response) {
                     if (response.message && response.message.length > 0) {
-                        console.log("In")
                         const conflicting_doc = response.message[0].name;
                         const test_lab_id = frm.doc.test_lab;
                         frappe.msgprint(
