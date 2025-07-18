@@ -19,12 +19,12 @@ frappe.ui.form.on('Test Run', {
                 callback: function(ldResponse) {
                     // If another active Test Run exists for this test_lab
                     if (ldResponse.message && ldResponse.message.length > 0) {
-                        const lConflictingRun = ldResponse.message[0].name;
-                        const lTestLabId = frm.doc.test_lab;
+                        const LConflictingRun = ldResponse.message[0].name;
+                        const LTestLabId = frm.doc.test_lab;
 
                         // Show warning and unset the current checkbox
                         frappe.msgprint(
-                            `For this <b>${lTestLabId}</b>, the Test Run <b>${lConflictingRun}</b> is already active.`
+                            `For this <b>${LTestLabId}</b>, the Test Run <b>${LConflictingRun}</b> is already active.`
                         );
                         frm.set_value('is_active_run', 0);
                     }
