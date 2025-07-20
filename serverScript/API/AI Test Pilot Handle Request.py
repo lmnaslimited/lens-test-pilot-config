@@ -4,7 +4,7 @@ l_test_script = frappe.form_dict.get("i_test_script")
 l_test_lab_id = frappe.form_dict.get("i_test_lab")
 l_action = frappe.form_dict.get("i_action")
 
-# Optional: Fetch specific Master Data if provided
+#  Fetch specific Master Data if provided
 if l_master_data_id:
     la_master_data = frappe.get_list(
         "Master Data",
@@ -12,7 +12,7 @@ if l_master_data_id:
         fields=["*"]
     )
 
-# Optional: Fetch specific Test Script if provided
+#  Fetch specific Test Script if provided
 if l_test_script:
     la_scripts = frappe.get_list(
         "Test Case Configurator",
