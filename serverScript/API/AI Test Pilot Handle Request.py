@@ -1,70 +1,91 @@
 # Get request parameters from form input
-l_master_data_id = frappe.form_dict.get("i_master_data")
-l_test_script = frappe.form_dict.get("i_test_script")
-l_test_lab_id = frappe.form_dict.get("i_test_lab")
-l_action = frappe.form_dict.get("i_action")
+test_lab_id = frappe.form_dict.get("i_test_lab")
+action = frappe.form_dict.get("i_action")
 
-#  Fetch specific Master Data if provided
-if l_master_data_id:
-    la_master_data = frappe.get_list(
-        "Master Data",
-        filters={"name": l_master_data_id},
-        fields=["*"]
-    )
+# Initialize response
+response_data = {}
 
-#  Fetch specific Test Script if provided
-if l_test_script:
-    la_scripts = frappe.get_list(
-        "Test Case Configurator",
-        filters={"name": l_test_script},
-        fields=["*"]
-    )
-
-# Initialize output dictionary
-ld_output = {}
-
-# Action: get_test_data → Fetch or create Test Run and collect Master Data
-if l_action == "get_test_data" and l_test_lab_id:
-    la_existing_active_runs = frappe.get_list(
+# Action: Fetch or create Test Run and Master Data
+if action == "get_test_data" and test_lab_id:
+    # Check for existing active Test Run
+    active_runs = frappe.get_list(
         "Test Run",
-        filters={
-            "test_lab": l_test_lab_id,
-            "is_active_run": 1
-        },
+        filters={"test_lab": test_lab_id, "is_active_run": 1},
         fields=["name"],
         limit=1
     )
-
-    if la_existing_active_runs:
-        l_test_run_name = la_existing_active_runs[0].name
+    if active_runs:
+        test_run_name = active_runs[0].name
     else:
-        ld_new_test_run = frappe.get_doc({
+        test_run_doc = frappe.get_doc({
             "doctype": "Test Run",
-            "test_lab": l_test_lab_id
+            "test_lab": test_lab_id
         })
-        ld_new_test_run.insert()
+        test_run_doc.insert()
         frappe.db.commit()
-        l_test_run_name = ld_new_test_run.name
+        test_run_name = test_run_doc.name
 
-    ld_test_run_doc = frappe.get_doc("Test Run", l_test_run_name)
+    test_run = frappe.get_doc("Test Run", test_run_name)
+    test_lab = frappe.get_doc("Test Lab", test_lab_id)
 
-    la_scripts_data = []
-    for l_log in ld_test_run_doc.get("test_log", []):
-        if l_log.test_script and l_log.master_data:
-            ld_master_data_doc = frappe.get_doc("Master Data", l_log.master_data)
-            la_scripts_data.append(ld_master_data_doc.as_dict())
+    # Build master_data_map from test_run.test_log
+    master_data_map = {}
+    for log in test_run.get("test_log", []):
+        if log.master_data:
+            doc = frappe.get_doc("Master Data", log.master_data)
+            master_data_map[log.master_data] = doc.as_dict()
 
-    ld_output = {
-        "test_run": ld_test_run_doc.as_dict(),
-        "master_data": la_scripts_data
+    ordered_rows = test_lab.get("test_lab_script", [])
+    merged_data = []
+
+    for row in ordered_rows:
+        if not row.master_data or row.master_data not in master_data_map:
+            continue
+
+        current_doc = master_data_map[row.master_data]
+        current_data = current_doc.get("actual_test_data", [])
+
+        if not row.is_connection:
+            # Non-connection: add directly
+            merged_data.append(current_doc)
+        else:
+            if merged_data and merged_data[-1].get("is_connection_group"):
+                # Merge with previous connection group
+                prev_doc = merged_data[-1]
+                prev_data = prev_doc["actual_test_data"]
+                last_pos = max((item.get("pos", 0) for item in prev_data), default=0)
+                offset = last_pos + 10
+                for i, item in enumerate(current_data):
+                    item["pos"] = offset + i * 10
+                prev_data.extend(current_data)
+                prev_doc["actual_test_data"] = prev_data
+                prev_doc["name"] = prev_doc["name"] + f"${current_doc['name']}"
+            else:
+                # Start a new connection group
+                for i, item in enumerate(current_data):
+                    item["pos"] = i * 10
+                new_doc = current_doc.copy()
+                new_doc["is_connection_group"] = True  # Helper flag
+                merged_data.append(new_doc)
+
+    # Remove helper flags if needed
+    for doc in merged_data:
+        doc.pop("is_connection_group", None)
+
+    # Build response
+    response_data = {
+        "test_run": test_run.as_dict(),
+        "master_data": merged_data
     }
 
-# Action: get_test_lab → Fetch full Test Lab including child table `test_lab_script`
-elif l_action == "get_test_lab" and l_test_lab_id:
-    ld_test_lab_doc = frappe.get_doc("Test Lab", l_test_lab_id)
-    ld_output = {
-        "test_lab": ld_test_lab_doc.as_dict()
-    }
+    # If any master data has status = "Stale"
+    if any(doc.get("status") == "Stale" for doc in merged_data):
+        response_data["master_data"] = {"status": "Stale Master Data"}
 
-# Return the appropriate output
-frappe.response['message'] = ld_output
+# Action: Fetch Test Lab document with child table
+elif action == "get_test_lab" and test_lab_id:
+    test_lab = frappe.get_doc("Test Lab", test_lab_id)
+    response_data = {"test_lab": test_lab.as_dict()}
+
+# Send response
+frappe.response['message'] = response_data
