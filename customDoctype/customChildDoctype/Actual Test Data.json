@@ -42,6 +42,8 @@
   "show_preview_popup": 0,
   "index_web_pages_for_search": 1,
   "doctype": "DocType",
+  "actions": [],
+  "permissions": [],
   "fields": [
     {
       "docstatus": 0,
@@ -540,7 +542,7 @@
       "fieldname": "data_type",
       "label": "Data Type",
       "fieldtype": "Select",
-      "options": "\nData\nText\nSmall Text\nLink\nSelect\nDate\nDynamic Link\nCurrency",
+      "options": "\nData\nText\nSmall Text\nLink\nSelect\nDate\nDynamic Link\nCurrency\nHTML",
       "search_index": 0,
       "show_dashboard": 0,
       "hidden": 0,
@@ -969,8 +971,6 @@
       "doctype": "DocField"
     }
   ],
-  "permissions": [],
-  "actions": [],
   "links": [],
   "states": []
 }
