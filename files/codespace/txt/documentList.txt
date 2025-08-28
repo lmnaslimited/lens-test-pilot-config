@@ -13,3 +13,4 @@ document/Test Case Configurator
 document/Master Data
 document/Test Plan
 document/Test Lab
+document/Workspace
