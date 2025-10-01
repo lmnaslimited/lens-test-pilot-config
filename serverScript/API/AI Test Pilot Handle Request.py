@@ -38,6 +38,10 @@ if l_action == "get_test_data" and l_test_lab_id:
     la_script_rows = ld_test_lab.get("test_lab_script", [])
     la_final_master = []
 
+    # Initialize login map
+    ld_login_map = {}
+    l_current_group_key = None
+
     for ld_row in la_script_rows:
         l_master_id = ld_row.master_data
         if not l_master_id or l_master_id not in ld_master_map:
@@ -46,14 +50,28 @@ if l_action == "get_test_data" and l_test_lab_id:
         ld_curr_doc = ld_master_map[l_master_id]
         la_curr_data = ld_curr_doc.get("actual_test_data", [])
 
+        # Decrypt password for this row
+        l_decrypted_password = ld_row.get_password("login_password")
+        l_email = ld_row.login_username
+
         if not ld_row.is_connection:
+            # Single master data
             la_final_master.append(ld_curr_doc)
+            ld_login_map[l_master_id] = {"email": l_email, "password": l_decrypted_password}
+            l_current_group_key = None  # Reset group key
         else:
+            # Connection group
             if not la_final_master or not la_final_master[-1].get("is_connection_group"):
+                # Start new connection group
                 ld_new_group = ld_curr_doc.copy()
                 ld_new_group["is_connection_group"] = True
                 la_final_master.append(ld_new_group)
+
+                # Initialize group key and login map
+                l_current_group_key = ld_curr_doc["name"]
+                ld_login_map[l_current_group_key] = {"email": l_email, "password": l_decrypted_password}
             else:
+                # Extend previous connection group
                 ld_prev_group = la_final_master[-1]
                 la_prev_data = ld_prev_group.get("actual_test_data", [])
                 l_last_pos = max((item.get("pos", 0) for item in la_prev_data), default=0)
@@ -66,7 +84,12 @@ if l_action == "get_test_data" and l_test_lab_id:
 
                 la_prev_data.extend(la_updated_data)
                 ld_prev_group["actual_test_data"] = la_prev_data
-                ld_prev_group["name"] = f"{ld_prev_group['name']}${ld_curr_doc['name']}"
+                ld_prev_group["name"] = f"{ld_prev_group['name']}&{ld_curr_doc['name']}"
+
+                # Update login map key for combined group
+                l_new_group_key = f"{l_current_group_key}&{ld_curr_doc['name']}"
+                ld_login_map[l_new_group_key] = ld_login_map.pop(l_current_group_key)
+                l_current_group_key = l_new_group_key
 
     # Remove helper flag
     for ld_doc in la_final_master:
@@ -75,7 +98,8 @@ if l_action == "get_test_data" and l_test_lab_id:
     # Prepare response
     ld_response = {
         "test_run": ld_test_run.as_dict(),
-        "master_data": la_final_master
+        "master_data": la_final_master,
+        "login_data": ld_login_map
     }
 
     # If any master data is stale
