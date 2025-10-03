@@ -6,6 +6,12 @@ if doc.test_lab and not doc.test_log:
         doc.append("test_log", {
             "test_plan": ld_lab_script.test_plan,
             "test_script": ld_lab_script.test_script,
-            "master_data": ld_lab_script.master_data
+            "master_data": ld_lab_script.master_data,
+            "connection": ld_lab_script.connection,
+            "connection_doctype": ld_lab_script.connection_doctype,
+            "linked_document": ld_lab_script.linked_document,
+            "connection_from": ld_lab_script.connection_from,
+            "login_username": ld_lab_script.login_username,
+            "login_password": ld_lab_script.login_password
         })
     doc.save()

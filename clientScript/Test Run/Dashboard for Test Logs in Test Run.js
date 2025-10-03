@@ -19,6 +19,10 @@ frappe.ui.form.on('Test Run', {
                                 test_plan: ldScript.test_plan,
                                 test_script: ldScript.test_script,
                                 master_data: ldScript.master_data,
+                                connection: ldScript.connection,
+                                connection_doctype: ldScript.connection_doctype,
+                                linked_document: ldScript.linked_document,
+                                connection_from: ldScript.connection_from,
                                 login_username: ldScript.login_username,
                                 login_password: ldScript.login_password
                             });
