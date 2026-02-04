@@ -3,7 +3,7 @@
   "docstatus": 0,
   "idx": 0,
   "title": "Sample Test",
-  "site": "",
+  "site": "https://sgbcz.docker.localhost",
   "doctype_to_be_tested": "Customer",
   "action": "Create",
   "is_workflow_test_script": 0,

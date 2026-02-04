@@ -2,8 +2,8 @@
   "name": "site-details",
   "docstatus": 0,
   "idx": 0,
-  "site_name": "https://qsgbcz.docker.localhost",
-  "authorization_key": "Basic NDc2MWE2MTRlMmM3OGQyOmZlZDg4NjllYTZjMTY4Zg==",
+  "site_name": "https://sgbcz.docker.localhost",
+  "authorization_key": "Basic NGRhNWU1MjIzNjAzN2Y2OjcxMGY1NjI0OWMwNWU0Ng==",
   "client": "Host",
   "doctype_list": "[\"Customer\" , \"Item\" , \"Sales Order\" , \"Quotation\" , \"Supplier\" , \"Supplier Quotation\" , \"Purchase Order\" , \"Purchase Invoice\" , \"Purchase Receipt\",\"Sales Invoice ,\n\"Payment Entry\",\"Production Plan\",\"Job Card\",\"Work Order\",\"Delivery Note\"]",
   "doctype": "Site Details"
