@@ -9,8 +9,8 @@ la_incoming_rows = ld_configurator.test_fields or []
 
 # Build incoming lookup ONCE
 ld_incoming_lookup = {
-    f"{row.action}|{row.field_name}": row
-    for row in la_incoming_rows
+    f"{ld_row.action}|{ld_row.field_name}": ld_row
+    for ld_row in la_incoming_rows
 }
 
 # Get all stale Master Data linked to this configurator
@@ -28,8 +28,8 @@ for ld_master_data in la_stale_master_data:
 
     # Lookup existing rows by action|field_name key
     ld_existing_lookup = {
-        f"{row.action}|{row.field_name}": row
-        for row in ld_master.actual_test_data
+        f"{ld_row.action}|{ld_row.field_name}": ld_row
+        for ld_row in ld_master.actual_test_data
     }
 
     la_updated_rows = []
