@@ -20,6 +20,10 @@ frappe.ui.form.on('Master Data', {
                         frm.set_value('action', ldSource.action);
                     }
 
+                    if (ldSource.test_type) {
+                        frm.set_value('action', ldSource.test_type);
+                    }
+
                     // Copy 'document' field value from the Test Case Configurator
                     if (ldSource.document) {
                         frm.set_value('document', ldSource.document);
