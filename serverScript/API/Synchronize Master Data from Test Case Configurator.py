@@ -59,7 +59,7 @@ for ld_master_data in la_stale_master_data:
     ld_master.actual_test_data = la_updated_rows
 
     # Sort rows by pos and update idx for correct UI display order
-    ld_master.actual_test_data.sort(l_key=lambda ld_row: ld_row.pos or 0)
+    ld_master.actual_test_data.sort(key=lambda ld_row: ld_row.pos or 0)
     for l_idx, ld_row in enumerate(ld_master.actual_test_data):
         ld_row.idx = l_idx
 
