@@ -2,6 +2,14 @@
 frappe.ui.form.on('Master Data', {
     // Execute when the form is loaded
     onload: function(frm) {
+        // Set status = Active for new documents
+        if (frm.is_new() && !frm.doc.status) {
+            frm.set_value('status', 'Active');
+        }
+        // Make 'status' read-only if it's "Stale"
+        if (frm.doc.status === "Stale") {
+            frm.set_df_property('status', 'read_only', 1);
+        }
         // Check if this is a new document and has test_script field populated
         if (frm.is_new() && frm.doc.test_script) {
             // Fetch the linked Test Case Configurator document

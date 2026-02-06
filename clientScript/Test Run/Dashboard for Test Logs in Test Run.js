@@ -11,13 +11,23 @@ frappe.ui.form.on('Test Run', {
                 },
                 callback: function(ldResponse) {
                     let ldTestLab = ldResponse.message;
+                    
                     if (ldTestLab && ldTestLab.test_lab_script) {
                         ldTestLab.test_lab_script.forEach(function(ldScript) {
                             //Append the Test Lab child into Test Run child 'Test Log"
                             frm.add_child('test_log', {
+                                task_id: ldScript.task_id,
                                 test_plan: ldScript.test_plan,
                                 test_script: ldScript.test_script,
-                                master_data: ldScript.master_data
+                                master_data: ldScript.master_data,
+                                connection: ldScript.connection,
+                                connection_doctype: ldScript.connection_doctype,
+                                linked_document: ldScript.linked_document,
+                                connection_from: ldScript.connection_from,
+                                use_docname: ldScript.use_docname,
+                                store_docname: ldScript.store_docname,
+                                login_username: ldScript.login_username,
+                                login_password: ldScript.login_password
                             });
                         });
                         frm.refresh_field('test_log');
