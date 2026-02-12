@@ -638,7 +638,7 @@
       "fieldname": "action",
       "label": "Action",
       "fieldtype": "Select",
-      "options": "\nCreate Doc\nOnload\nOn Change\nOn Tab\nExpand Section\nEdit Details\nAdd Row\nSave\nSubmit\nCancel\nAmend\nDelete\nClick Button\nAction Menu\nOn Validate\nClick Group Button\nValidate Group Button Options\nOn Intro Banner\nValidate Attachment\nValidate Assignee",
+      "options": "\nCreate Doc\nOnload\nOn Change\nOn Tab\nExpand Section\nEdit Details\nAdd Row\nSave\nSubmit\nCancel\nAmend\nDelete\nClick Button\nAction Menu\nOn Validate\nClick Group Button\nValidate Group Button Options\nOn Intro Banner\nValidate Attachment\nValidate Assignee\nValidate Breadcrumbs",
       "search_index": 0,
       "show_dashboard": 0,
       "hidden": 0,
