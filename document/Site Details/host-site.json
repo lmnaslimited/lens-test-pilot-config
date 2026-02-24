@@ -5,6 +5,6 @@
   "site_name": "",
   "authorization_key": "",
   "client": "Host",
-  "doctype_list": "[\"Customer\" , \"Item\" , \"Sales Order\" , \"Quotation\" , \"Supplier\" , \"Supplier Quotation\" , \"Purchase Order\" , \"Purchase Invoice\" , \"Purchase Receipt\",\"Sales Invoice ,\n\"Payment Entry\",\"Production Plan\",\"Job Card\",\"Work Order\",\"Delivery Note\"]",
+  "doctype_list": "[\"Customer\" , \"Address\" , \"Item\" , \"Design\" , \"Sales Order\" , \"Quotation\" , \"Supplier\" , \"Supplier Quotation\" , \"Purchase Order\" , \"Purchase Invoice\" , \"Purchase Receipt\",\"Sales Invoice ,\n\"Payment Entry\",\"Production Plan\",\"Job Card\",\"Work Order\",\"Delivery Note\"]",
   "doctype": "Site Details"
 }

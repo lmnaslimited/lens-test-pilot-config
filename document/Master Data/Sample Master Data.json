@@ -9,7 +9,6 @@
   "status": "Active",
   "doctype_to_be_tested": "Customer",
   "action": "Create",
-  "is_workflow_test_script": 0,
   "doctype": "Master Data",
   "actual_test_data": [
     {
