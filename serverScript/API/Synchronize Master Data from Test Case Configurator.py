@@ -10,6 +10,7 @@ la_incoming_rows = ld_configurator.test_fields or []
 LaFieldOnConcern = [
     "doctype_to_be_tested",
     "pos",
+    "assisting_doctype",
     "is_child",
     "child_name",
     "child_index",
