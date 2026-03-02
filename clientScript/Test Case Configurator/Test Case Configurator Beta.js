@@ -47,8 +47,8 @@ frappe.ui.form.on('Test Case Configurator', {
         const uniqueDoctypes = new Set();
     
         frm.doc.test_fields.forEach(row => {
-            if (row.assisting_doctype) {
-                uniqueDoctypes.add(row.assisting_doctype);
+            if (row.connecting_doctype) {
+                uniqueDoctypes.add(row.connecting_doctype);
             }
         });
     
@@ -96,7 +96,7 @@ function fnFetchDoctypeList(frm, iUpdateChild = false) {
 
             // Child field (only when requested)
             if (iUpdateChild) {
-                frm.fields_dict["test_fields"].grid.update_docfield_property("assisting_doctype", "options", LOptions);
+                frm.fields_dict["test_fields"].grid.update_docfield_property("connecting_doctype", "options", LOptions);
 
                 frm.fields_dict["test_fields"].grid.refresh();
             }
@@ -430,18 +430,18 @@ frappe.ui.form.on('Test Fields', {
 
         const row = locals[cdt][cdn];
         const grid = frm.fields_dict["test_fields"].grid;
-        if (!row.assisting_doctype) {
-          row.assisting_doctype = frm.doc.doctype_to_be_tested;
+        if (!row.connecting_doctype) {
+          row.connecting_doctype = frm.doc.doctype_to_be_tested;
         }
 
-        fnResetParentFieldConfiguration(frm, cdt, cdn, row.assisting_doctype, false);
+        fnResetParentFieldConfiguration(frm, cdt, cdn, row.connecting_doctype, false);
         if (row.is_child) {
             if (row.child_name) {
                 // Get fields for existing child_name
                 const LaChildFields = fnGetFieldNamesForChild(
                     frm.doc.json_response,
                     row.child_name,
-                    row.assisting_doctype
+                    row.connecting_doctype
                 );
 
                 // Update field_name options
@@ -488,9 +488,9 @@ frappe.ui.form.on('Test Fields', {
     },
     test_fields_add(frm, cdt, cdn) {
         const ldItem = locals[cdt][cdn];
-        // Set assisting_doctype same as doctype_to_be_tested
+        // Set connecting_doctype same as doctype_to_be_tested
         if (frm.doc.doctype_to_be_tested) {
-            frappe.model.set_value(cdt, cdn, "assisting_doctype", frm.doc.doctype_to_be_tested);
+            frappe.model.set_value(cdt, cdn, "connecting_doctype", frm.doc.doctype_to_be_tested);
         }
         fnResetParentFieldConfiguration(frm, cdt, cdn, frm.doc.doctype_to_be_tested, true);
     },
@@ -504,7 +504,7 @@ frappe.ui.form.on('Test Fields', {
         }
 
         if (is_child) {
-            const LaChildNames = fnGetUniqueChildNames(frm.doc.json_response, ldItem.assisting_doctype);
+            const LaChildNames = fnGetUniqueChildNames(frm.doc.json_response, ldItem.connecting_doctype);
             
             // Clear field_name when is_child is checked
             frappe.model.set_value(cdt, cdn, 'field_name', '');  // Clear field_name
@@ -526,14 +526,14 @@ frappe.ui.form.on('Test Fields', {
             frm.fields_dict["test_fields"].grid.update_docfield_property("child_name", "options", ''); 
 
             // Repopulate field_name with only parent fields
-            const all_field_names = fnGetAllFieldNames(frm.doc.json_response, ldItem.assisting_doctype);
+            const all_field_names = fnGetAllFieldNames(frm.doc.json_response, ldItem.connecting_doctype);
             frm.fields_dict["test_fields"].grid.update_docfield_property("field_name", "options", all_field_names.join('\n'));
             frm.fields_dict["test_fields"].grid.refresh();
         }
     },
     child_name(frm, cdt, cdn) {
         const ldItem = locals[cdt][cdn];
-        const LaFieldOptions = fnGetFieldNamesForChild(frm.doc.json_response, ldItem.child_name, ldItem.assisting_doctype);
+        const LaFieldOptions = fnGetFieldNamesForChild(frm.doc.json_response, ldItem.child_name, ldItem.connecting_doctype);
         if (ldItem.child_name) {
             
             // Ensure the field list updates properly
@@ -543,17 +543,17 @@ frappe.ui.form.on('Test Fields', {
         frm.fields_dict["test_fields"].grid.refresh();
     },
     
-    assisting_doctype(frm, cdt, cdn) {
+    connecting_doctype(frm, cdt, cdn) {
         const ldItem = locals[cdt][cdn];
         if (!frm.doc.site) return;
     
         // Update options
         fnFetchDoctypeList(frm, true);
     
-        // Fetch meta for selected assisting_doctype
-        if (ldItem.assisting_doctype != frm.doc.doctype_to_be_tested) {
-            fnFetchDoctypeDetails(frm, ldItem.assisting_doctype);
+        // Fetch meta for selected connecting_doctype
+        if (ldItem.connecting_doctype != frm.doc.doctype_to_be_tested) {
+            fnFetchDoctypeDetails(frm, ldItem.connecting_doctype);
         }
-        fnResetParentFieldConfiguration(frm, cdt, cdn, ldItem.assisting_doctype, true);
+        fnResetParentFieldConfiguration(frm, cdt, cdn, ldItem.connecting_doctype, true);
     }
 });

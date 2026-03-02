@@ -10,7 +10,7 @@ la_incoming_rows = ld_configurator.test_fields or []
 LaFieldOnConcern = [
     "doctype_to_be_tested",
     "pos",
-    "assisting_doctype",
+    "connecting_doctype",
     "is_child",
     "child_name",
     "child_index",
@@ -25,6 +25,7 @@ LaFieldOnConcern = [
     "message_type",
     "message",
     "menus",
+    "description",
 ]
 
 def fn_has_changed(id_existing, id_incoming):
