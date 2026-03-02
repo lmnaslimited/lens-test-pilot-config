@@ -38,6 +38,7 @@ frappe.ui.form.on('Master Data', {
                             // Copy all field values from the test_fields row
                             // to the actual_test_data row:
                             ldMasterData.pos = ldTestFields.pos;                  // Field position in the form
+                            ldMasterData.connecting_doctype = ldTestFields.connecting_doctype; // Doctype Related to the Field Name
                             ldMasterData.is_child = ldTestFields.is_child;        // Whether this is a child table field
                             ldMasterData.child_name = ldTestFields.child_name;    // Name of child table if applicable
                             ldMasterData.child_index = ldTestFields.child_index;  // Index in child table
