@@ -542,7 +542,7 @@
       "fieldname": "data_type",
       "label": "Data Type",
       "fieldtype": "Select",
-      "options": "\nData\nText\nSmall Text\nText Editor\nLink\nSelect\nDate\nDatetime\nDynamic Link\nCurrency\nHTML\nCheck\nInt\nFloat",
+      "options": "\nData\nText\nSmall Text\nText Editor\nLink\nSelect\nDate\nDatetime\nDynamic Link\nCurrency\nHTML\nCheck\nInt\nFloat\nTable MultiSelect",
       "search_index": 0,
       "show_dashboard": 0,
       "hidden": 0,
