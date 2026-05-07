@@ -50,9 +50,11 @@ if l_action == "get_test_data" and l_test_lab_id:
         ld_curr_doc = ld_master_map[l_master_id]
         la_curr_data = ld_curr_doc.get("actual_test_data", [])
 
+        # introduced single source of truth for maintaining all the login credential
+        ld_identity_provider = frappe.get_doc("Identity Provider", ld_row.identity_provider)
         # Decrypt password for this row
-        l_decrypted_password = ld_row.get_password("login_password")
-        l_email = ld_row.login_username
+        l_decrypted_password = ld_identity_provider.get_password("password")
+        l_email = ld_identity_provider.username
 
         if not ld_row.is_connection:
             # Single master data
@@ -69,7 +71,10 @@ if l_action == "get_test_data" and l_test_lab_id:
 
                 # Initialize group key and login map
                 l_current_group_key = ld_curr_doc["name"]
-                ld_login_map[l_current_group_key] = {"email": l_email, "password": l_decrypted_password}
+                ld_login_map[l_current_group_key] = {
+                    "email": l_email,
+                    "password": l_decrypted_password,
+                }
             else:
                 # Extend previous connection group
                 ld_prev_group = la_final_master[-1]
