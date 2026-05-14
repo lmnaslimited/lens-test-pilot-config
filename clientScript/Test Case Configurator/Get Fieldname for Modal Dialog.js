@@ -12,14 +12,35 @@ frappe.ui.form.on("Test Case Configurator", {
             fieldtype: "HTML",
             fieldname: "instructions",
             options: `
-							<div style="margin-bottom: 15px;">
-								<p><b>Instructions:</b></p>
-								<ol style="padding-left: 18px;">
-									<li>Inspect the Modal Dialog you wish to test in the site.</li>
-									<li>From the Inspect Element tab, copy the full <b>modal-dialog</b> HTML element.</li>
-									<li>Paste it below.</li>
-								</ol>
-							</div>
+						<div style="margin-bottom: 15px;">
+							<p><b>Instructions:</b></p>
+
+							<ol style="padding-left: 18px;">
+
+								<li>
+									Open the modal dialog you want to configure test case.
+								</li>
+
+								<li>
+									Right-click inside the modal and select <b>Inspect</b>.
+								</li>
+
+								<li>
+									In the browser Inspect panel, locate the parent
+									<b>modal-dialog</b> element.
+								</li>
+
+								<li>
+									Right-click the <b>modal-dialog</b> element and choose
+									<b>Edit as HTML → Copy element</b>.
+								</li>
+
+								<li>
+									Paste the copied HTML below and click <b>Confirm</b>.
+								</li>
+
+							</ol>
+						</div>
 						`,
           },
           {
