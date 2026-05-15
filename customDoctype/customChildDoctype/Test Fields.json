@@ -371,7 +371,7 @@
       "permlevel": 0,
       "ignore_user_permissions": 0,
       "columns": 2,
-      "description": "For \"Onload\" and \"On Change\", specifies the data to be tested.\nFor \"Validate Alert\", defines the alert color.\nFor \"Click Button\" and \"Click Group Button\", specifies the button label.\nFor \"API GET\" and \"API PUT\", specifies the endpoint to be tested",
+      "description": "For \"Onload\" and \"On Change\", specifies the data to be tested.\nFor \"Validate Alert\", defines the alert color.\nFor \"Click Button\" and \"Click Group Button\", specifies the button label.\nFor \"API GET\" and \"API PUT\", specifies the endpoint to be tested\nFor \"Modal Dialog\", defines the modal button name.",
       "in_list_view": 1,
       "fetch_if_empty": 0,
       "in_filter": 0,
