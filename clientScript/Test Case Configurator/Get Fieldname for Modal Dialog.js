@@ -49,6 +49,27 @@ frappe.ui.form.on("Test Case Configurator", {
             label: "Modal HTML",
             reqd: 1,
           },
+          {
+            fieldtype: "HTML",
+            fieldname: "notes",
+            options: `
+						<div style="margin-bottom: 15px;">
+                <p><b>Note:</b></p>
+
+                <ol style="padding-left: 18px;">
+
+                    <li>
+                        Go to <b>Site Details</b> and include the <b>Modal</b> in <b>Doctype_list</b>.
+                    </li>
+
+                    <li>
+                        In <b>Test Case Configurator</b>, select the connecting doctype as <b>Modal</b> in the row. The modal fields will then be shown automatically.
+                    </li>
+
+                </ol>
+            </div>
+						`,
+          },
         ],
 
         primary_action_label: "Confirm",
