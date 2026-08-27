@@ -15,7 +15,6 @@ if doc.test_lab and not doc.test_log:
             "use_docname": ld_lab_script.use_docname,
             "store_docname": ld_lab_script.store_docname,
             "is_connection": ld_lab_script.is_connection,
-            "login_username": ld_lab_script.login_username,
-            "login_password": ld_lab_script.login_password
+            "identity_provider": ld_lab_script.identity_provider
         })
     doc.save()
